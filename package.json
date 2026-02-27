@@ -1,0 +1,52 @@
+{
+  "name": "filipe-website",
+  "version": "1.0.0",
+  "description": "Site pessoal de Filipe - fil.pe",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "echo 'Configure your deployment method'",
+    "test": "echo 'Add tests here'",
+    "lint:css": "npx stylelint styles.css",
+    "lint:js": "npx eslint script.js",
+    "lighthouse": "npx lighthouse http://localhost:8000 --output html --output-path ./lighthouse-report.html",
+    "validate:html": "npx html-validate index.html"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "frontend",
+    "html",
+    "css",
+    "javascript",
+    "responsive"
+  ],
+  "author": "Filipe <hello@fil.pe>",
+  "license": "MIT",
+  "homepage": "https://fil.pe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipe/fil.pe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/filipe/fil.pe/issues"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "stylelint": "^15.0.0",
+    "html-validate": "^8.0.0",
+    "lighthouse": "^10.0.0",
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ]
+}
