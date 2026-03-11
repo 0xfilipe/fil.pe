@@ -1,0 +1,113 @@
+/* =============================================
+   BASE STYLES
+   Common styles shared across all pages
+   ============================================= */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body defaults (font smoothing comes from typography.css) */
+body {
+  font-family: var(--font-family);
+  background-color: var(--surface-tertiary);
+  color: var(--content-primary);
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* =============================================
+   THEME TOGGLE COMPONENT
+   ============================================= */
+
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+}
+
+.theme-toggle {
+  width: 24px;
+  height: 16px;
+  background-color: var(--stroke-border-strong);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: 2px;
+}
+
+[data-theme="dark"] .theme-toggle {
+  background-color: var(--button-accent);
+}
+
+.theme-toggle-slider {
+  width: 12px;
+  height: 12px;
+  background-color: var(--content-on-accent);
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+}
+
+[data-theme="dark"] .theme-toggle-slider {
+  transform: translateY(-50%) translateX(8px);
+}
+
+.theme-toggle-label {
+  color: var(--content-quaternary);
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .theme-toggle-label {
+  color: var(--content-primary);
+}
+
+/* =============================================
+   LAYOUT
+   ============================================= */
+
+.container {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 24px 80px 24px;
+}
+
+/* =============================================
+   BACK BUTTON (for subpages)
+   ============================================= */
+
+.back-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  text-decoration: none;
+  color: var(--content-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+}
+
+.back-button svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.back-button svg path {
+  fill: currentColor;
+}

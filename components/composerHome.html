@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composer-Home Component - Design System</title>
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="textInput.css">
+  <link rel="stylesheet" href="button.css">
+  <link rel="stylesheet" href="iconButton.css">
+  <style>
+    .component-row {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .text-input-demo {
+      max-width: 600px;
+      position: relative;
+    }
+
+    /* Autocomplete Dropdown Styles */
+    .autocomplete-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background-color: var(--surface-popover);
+      border: 1px solid var(--stroke-primary);
+      border-radius: 12px;
+      box-shadow: var(--shadow-home-composer);
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+
+    .autocomplete-dropdown.show {
+      display: block;
+    }
+
+    .autocomplete-suggestions {
+      padding: 8px 0;
+    }
+
+    .suggestion-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+      gap: 12px;
+    }
+
+    .suggestion-item:hover,
+    .suggestion-item.selected {
+      background-color: var(--button-ghost-hover);
+    }
+
+    .suggestion-icon-left {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--content-tertiary);
+    }
+
+    .suggestion-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .suggestion-text {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.01em;
+      font-weight: var(--font-weight-medium);
+      color: var(--content-primary);
+    }
+
+    .suggestion-text-secondary {
+      font-family: var(--font-family);
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0;
+      font-weight: var(--font-weight-medium);
+      color: var(--content-tertiary);
+    }
+
+    .suggestion-text-bold {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .suggestion-action {
+      font-family: var(--font-family);
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0;
+      font-weight: var(--font-weight-medium);
+      color: var(--content-tertiary);
+      flex-shrink: 0;
+    }
+
+    .suggestion-icon-right {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--button-accent);
+    }
+
+    .autocomplete-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-top: 1px solid var(--stroke-primary);
+      gap: 12px;
+    }
+
+    .autocomplete-navigation {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--content-tertiary);
+    }
+
+    .autocomplete-navigation-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--content-tertiary);
+    }
+
+    .autocomplete-action-button {
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle-wrapper">
+    <span class="theme-toggle-label text-caption">Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <div class="theme-toggle-slider"></div>
+    </button>
+  </div>
+
+  <a href="../index.html" class="back-button text-caption">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.72424 3.08191C5.9182 2.95382 6.18228 2.97579 6.35315 3.14636C6.52401 3.31723 6.54577 3.58119 6.4176 3.77527L6.35315 3.85339L3.70667 6.49988H11.4996C11.7757 6.49988 11.9995 6.72381 11.9996 6.99988C11.9996 7.27602 11.7758 7.49988 11.4996 7.49988H3.70667L6.35315 10.1464C6.54841 10.3416 6.54841 10.6581 6.35315 10.8534C6.15788 11.0485 5.84133 11.0486 5.64612 10.8534L2.14612 7.35339L2.08167 7.27527C1.95378 7.08128 1.97549 6.81713 2.14612 6.64636L5.64612 3.14636L5.72424 3.08191Z" fill="currentColor"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="container">
+    <h1 class="page-title text-title">Composer Home</h1>
+
+    <div class="components-section">
+      <div class="component-group">
+        <div class="component-row">
+          <div class="text-input-demo">
+            <div class="text-input-wrapper">
+              <textarea id="composer-home-input" class="text-input" placeholder="Ask or search anything"></textarea>
+              <div class="text-input-bottom-bar">
+                <div class="text-input-buttons">
+                  <div class="text-input-button-wrapper">
+                    <button class="btn btn-ghost btn-size-28">
+                      <span class="btn-icon btn-icon-left">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.27038 11.2846L1.86574 12.3077C1.98945 12.523 2.16729 12.6923 2.37605 12.8154L4.50235 9.15381H0.249756C0.249756 9.39227 0.311612 9.63073 0.435324 9.84612L1.27038 11.2846Z" fill="#0066DA"/>
+                          <path d="M6.99978 4.84611L4.87349 1.18457C4.66472 1.30765 4.48689 1.47688 4.36317 1.69226L0.435324 8.4615C0.313887 8.67225 0.249918 8.9109 0.249756 9.15381H4.50235L6.99978 4.84611Z" fill="#00AC47"/>
+                          <path d="M11.6239 12.8154C11.8327 12.6923 12.0105 12.523 12.1342 12.3077L12.3817 11.8846L13.5646 9.84612C13.6884 9.63073 13.7502 9.39227 13.7502 9.15381H9.49731L10.4023 10.923L11.6239 12.8154Z" fill="#EA4335"/>
+                          <path d="M6.99947 4.84592L9.12576 1.18437C8.917 1.06129 8.67731 0.999756 8.42988 0.999756H5.56905C5.32162 0.999756 5.08193 1.06899 4.87317 1.18437L6.99947 4.84592Z" fill="#00832D"/>
+                          <path d="M9.49677 9.15356H4.50191L2.37561 12.8151C2.58437 12.9382 2.82407 12.9997 3.07149 12.9997H10.9272C11.1746 12.9997 11.4143 12.9305 11.6231 12.8151L9.49677 9.15356Z" fill="#2684FC"/>
+                          <path d="M11.6003 5.07688L9.63636 1.69226C9.51265 1.47688 9.33482 1.30765 9.12605 1.18457L6.99976 4.84611L9.49719 9.15381H13.742C13.742 8.91535 13.6802 8.67689 13.5565 8.4615L11.6003 5.07688Z" fill="#FFBA00"/>
+                        </svg>
+                      </span>
+                      <span class="btn-text">Sonnet 4.5</span>
+                    </button>
+                  </div>
+                  <div class="text-input-icon-buttons-wrapper">
+                    <button class="icon-btn icon-btn-ghost icon-btn-size-28">
+                      <span class="icon-btn-icon">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_info_default)">
+                            <path d="M7 0.5C10.5899 0.5 13.5 3.41015 13.5 7C13.5 10.5899 10.5899 13.5 7 13.5C3.41015 13.5 0.5 10.5899 0.5 7C0.5 3.41015 3.41015 0.5 7 0.5ZM7 1.5C3.96243 1.5 1.5 3.96243 1.5 7C1.5 10.0376 3.96243 12.5 7 12.5C10.0376 12.5 12.5 10.0376 12.5 7C12.5 3.96243 10.0376 1.5 7 1.5ZM7 6.5C7.27614 6.5 7.5 6.72386 7.5 7V9.5C7.5 9.77614 7.27614 10 7 10C6.72386 10 6.5 9.77614 6.5 9.5V7C6.5 6.72386 6.72386 6.5 7 6.5ZM7 4C7.41421 4 7.75 4.33579 7.75 4.75V4.75977C7.75 5.17398 7.41421 5.50977 7 5.50977C6.58579 5.50977 6.25 5.17398 6.25 4.75977V4.75C6.25 4.33579 6.58579 4 7 4Z" fill="currentColor"/>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_info_default">
+                              <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </button>
+                    <button id="send-button-home" class="icon-btn icon-btn-primary icon-btn-size-28" disabled>
+                      <span class="icon-btn-icon">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6.72485 2.08154C6.91887 1.9537 7.18301 1.97532 7.35376 2.146L10.8538 5.646L10.9182 5.72412C11.0463 5.91806 11.0243 6.18215 10.8538 6.35303C10.6829 6.52389 10.4189 6.54564 10.2249 6.41748L10.1467 6.35303L7.50024 3.70654V11.4995C7.50024 11.7756 7.27625 11.9994 7.00024 11.9995C6.7241 11.9995 6.50024 11.7757 6.50024 11.4995V3.70654L3.85376 6.35303C3.6585 6.54829 3.34199 6.54829 3.14673 6.35303C2.95154 6.15776 2.95149 5.84123 3.14673 5.646L6.64673 2.146L6.72485 2.08154Z" fill="currentColor"/>
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Autocomplete Dropdown -->
+            <div id="autocomplete-dropdown" class="autocomplete-dropdown">
+              <div class="autocomplete-suggestions">
+                <!-- Suggestion 1: Chat match -->
+                <div class="suggestion-item selected" data-type="chat">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2C4.68629 2 2 4.46243 2 7.5C2 8.92869 2.49609 10.2585 3.31836 11.3135L2.08398 14.083L4.85352 12.8486C5.90857 13.6709 7.23828 14.1669 8.66699 14.1669C12.0029 14.1669 14.6669 11.7045 14.6669 8.66699C14.6669 5.62952 12.0029 3.16699 8.66699 3.16699H8V2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text">Pr</span>
+                  </div>
+                  <span class="suggestion-action">Chat</span>
+                </div>
+
+                <!-- Suggestion 2: Chat prompt -->
+                <div class="suggestion-item" data-type="chat">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2C4.68629 2 2 4.46243 2 7.5C2 8.92869 2.49609 10.2585 3.31836 11.3135L2.08398 14.083L4.85352 12.8486C5.90857 13.6709 7.23828 14.1669 8.66699 14.1669C12.0029 14.1669 14.6669 11.7045 14.6669 8.66699C14.6669 5.62952 12.0029 3.16699 8.66699 3.16699H8V2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text">Prep my next meeting</span>
+                  </div>
+                  <span class="suggestion-action">Chat</span>
+                </div>
+
+                <!-- Suggestion 3: Chat prompt duplicate -->
+                <div class="suggestion-item" data-type="chat">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2C4.68629 2 2 4.46243 2 7.5C2 8.92869 2.49609 10.2585 3.31836 11.3135L2.08398 14.083L4.85352 12.8486C5.90857 13.6709 7.23828 14.1669 8.66699 14.1669C12.0029 14.1669 14.6669 11.7045 14.6669 8.66699C14.6669 5.62952 12.0029 3.16699 8.66699 3.16699H8V2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text">Prep my next meeting</span>
+                  </div>
+                  <span class="suggestion-action">Chat</span>
+                </div>
+
+                <!-- Suggestion 4: Contact -->
+                <div class="suggestion-item" data-type="contact">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M11.3333 11.3333L9.99998 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text suggestion-text-bold">Przemek Owczarek</span>
+                    <span class="suggestion-text-secondary">przemek@attio.com</span>
+                  </div>
+                  <svg class="suggestion-icon-right" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="7" fill="currentColor"/>
+                    <path d="M6 8L7.5 9.5L10 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Suggestion 5: List/Topic -->
+                <div class="suggestion-item" data-type="list">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M11.3333 11.3333L9.99998 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text">😊 Product designers hiring</span>
+                  </div>
+                  <span class="suggestion-action">List</span>
+                </div>
+
+                <!-- Suggestion 6: External/Product -->
+                <div class="suggestion-item" data-type="external">
+                  <svg class="suggestion-icon-left" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M11.3333 11.3333L9.99998 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="suggestion-content">
+                    <span class="suggestion-text">
+                      <span style="display: inline-flex; align-items: center; gap: 4px;">
+                        <span style="width: 16px; height: 16px; border-radius: 50%; background: #DA552F; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: 600;">P</span>
+                        <span class="suggestion-text-bold">Product Hunt</span>
+                      </span>
+                    </span>
+                    <span class="suggestion-text-secondary">producthunt.com</span>
+                  </div>
+                  <svg class="suggestion-icon-right" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="10" height="10" rx="1" fill="currentColor"/>
+                    <path d="M6 6L10 10M10 6L6 10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Footer with navigation and action -->
+              <div class="autocomplete-footer">
+                <div class="autocomplete-navigation">
+                  <svg class="autocomplete-navigation-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 3L7 11M3 7L11 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <svg class="autocomplete-navigation-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 3L7 11M3 7L11 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="text-caption" style="color: var(--content-tertiary);">Navigate</span>
+                </div>
+                <button class="btn btn-primary btn-size-28 autocomplete-action-button">
+                  <span class="btn-text">Chat</span>
+                  <span class="btn-icon btn-icon-right">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.5 9.5L9.5 4.5M9.5 4.5H4.5M9.5 4.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ask Attio Composer -->
+      <div class="component-group">
+        <div class="component-row">
+          <div class="text-input-demo">
+            <div class="text-input-wrapper">
+              <textarea id="composer-input" class="text-input" placeholder="Ask or search anything"></textarea>
+              <div class="text-input-bottom-bar">
+                <div class="text-input-buttons">
+                  <div class="text-input-button-wrapper">
+                    <button class="btn btn-ghost btn-size-28">
+                      <span class="btn-icon btn-icon-left">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.27038 11.2846L1.86574 12.3077C1.98945 12.523 2.16729 12.6923 2.37605 12.8154L4.50235 9.15381H0.249756C0.249756 9.39227 0.311612 9.63073 0.435324 9.84612L1.27038 11.2846Z" fill="#0066DA"/>
+                          <path d="M6.99978 4.84611L4.87349 1.18457C4.66472 1.30765 4.48689 1.47688 4.36317 1.69226L0.435324 8.4615C0.313887 8.67225 0.249918 8.9109 0.249756 9.15381H4.50235L6.99978 4.84611Z" fill="#00AC47"/>
+                          <path d="M11.6239 12.8154C11.8327 12.6923 12.0105 12.523 12.1342 12.3077L12.3817 11.8846L13.5646 9.84612C13.6884 9.63073 13.7502 9.39227 13.7502 9.15381H9.49731L10.4023 10.923L11.6239 12.8154Z" fill="#EA4335"/>
+                          <path d="M6.99947 4.84592L9.12576 1.18437C8.917 1.06129 8.67731 0.999756 8.42988 0.999756H5.56905C5.32162 0.999756 5.08193 1.06899 4.87317 1.18437L6.99947 4.84592Z" fill="#00832D"/>
+                          <path d="M9.49677 9.15356H4.50191L2.37561 12.8151C2.58437 12.9382 2.82407 12.9997 3.07149 12.9997H10.9272C11.1746 12.9997 11.4143 12.9305 11.6231 12.8151L9.49677 9.15356Z" fill="#2684FC"/>
+                          <path d="M11.6003 5.07688L9.63636 1.69226C9.51265 1.47688 9.33482 1.30765 9.12605 1.18457L6.99976 4.84611L9.49719 9.15381H13.742C13.742 8.91535 13.6802 8.67689 13.5565 8.4615L11.6003 5.07688Z" fill="#FFBA00"/>
+                        </svg>
+                      </span>
+                      <span class="btn-text">Sonnet 4.5</span>
+                    </button>
+                  </div>
+                  <div class="text-input-icon-buttons-wrapper">
+                    <button class="icon-btn icon-btn-ghost icon-btn-size-28">
+                      <span class="icon-btn-icon">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_info_default)">
+                            <path d="M7 0.5C10.5899 0.5 13.5 3.41015 13.5 7C13.5 10.5899 10.5899 13.5 7 13.5C3.41015 13.5 0.5 10.5899 0.5 7C0.5 3.41015 3.41015 0.5 7 0.5ZM7 1.5C3.96243 1.5 1.5 3.96243 1.5 7C1.5 10.0376 3.96243 12.5 7 12.5C10.0376 12.5 12.5 10.0376 12.5 7C12.5 3.96243 10.0376 1.5 7 1.5ZM7 6.5C7.27614 6.5 7.5 6.72386 7.5 7V9.5C7.5 9.77614 7.27614 10 7 10C6.72386 10 6.5 9.77614 6.5 9.5V7C6.5 6.72386 6.72386 6.5 7 6.5ZM7 4C7.41421 4 7.75 4.33579 7.75 4.75V4.75977C7.75 5.17398 7.41421 5.50977 7 5.50977C6.58579 5.50977 6.25 5.17398 6.25 4.75977V4.75C6.25 4.33579 6.58579 4 7 4Z" fill="currentColor"/>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_info_default">
+                              <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </button>
+                    <button id="send-button" class="icon-btn icon-btn-primary icon-btn-size-28" disabled>
+                      <span class="icon-btn-icon">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6.72485 2.08154C6.91887 1.9537 7.18301 1.97532 7.35376 2.146L10.8538 5.646L10.9182 5.72412C11.0463 5.91806 11.0243 6.18215 10.8538 6.35303C10.6829 6.52389 10.4189 6.54564 10.2249 6.41748L10.1467 6.35303L7.50024 3.70654V11.4995C7.50024 11.7756 7.27625 11.9994 7.00024 11.9995C6.7241 11.9995 6.50024 11.7757 6.50024 11.4995V3.70654L3.85376 6.35303C3.6585 6.54829 3.34199 6.54829 3.14673 6.35303C2.95154 6.15776 2.95149 5.84123 3.14673 5.646L6.64673 2.146L6.72485 2.08154Z" fill="currentColor"/>
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+  <script>
+    // Autocomplete functionality
+    const composerInput = document.getElementById('composer-home-input');
+    const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+    const sendButton = document.getElementById('send-button-home');
+    let selectedIndex = 0;
+    const suggestionItems = autocompleteDropdown.querySelectorAll('.suggestion-item');
+
+    function updateSendButtonState() {
+      const hasText = composerInput.value.trim().length > 0;
+      sendButton.disabled = !hasText;
+    }
+
+    function showAutocomplete() {
+      if (composerInput.value.trim().length > 0) {
+        autocompleteDropdown.classList.add('show');
+      } else {
+        autocompleteDropdown.classList.remove('show');
+      }
+    }
+
+    function updateSelection() {
+      suggestionItems.forEach((item, index) => {
+        if (index === selectedIndex) {
+          item.classList.add('selected');
+        } else {
+          item.classList.remove('selected');
+        }
+      });
+    }
+
+    // Show/hide autocomplete on input
+    composerInput.addEventListener('input', () => {
+      updateSendButtonState();
+      showAutocomplete();
+      selectedIndex = 0;
+      updateSelection();
+    });
+
+    // Keyboard navigation
+    composerInput.addEventListener('keydown', (e) => {
+      if (!autocompleteDropdown.classList.contains('show')) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, suggestionItems.length - 1);
+        updateSelection();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateSelection();
+      } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        e.preventDefault();
+        const selectedItem = suggestionItems[selectedIndex];
+        if (selectedItem) {
+          const text = selectedItem.querySelector('.suggestion-text').textContent.trim();
+          composerInput.value = text;
+          autocompleteDropdown.classList.remove('show');
+          updateSendButtonState();
+        }
+      } else if (e.key === 'Escape') {
+        autocompleteDropdown.classList.remove('show');
+      }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.text-input-demo')) {
+        autocompleteDropdown.classList.remove('show');
+      }
+    });
+
+    // Initial state
+    updateSendButtonState();
+
+    // Ask Attio Composer functionality
+    const composerInputStandard = document.getElementById('composer-input');
+    const sendButtonStandard = document.getElementById('send-button');
+
+    function updateSendButtonStateStandard() {
+      const hasText = composerInputStandard.value.trim().length > 0;
+      sendButtonStandard.disabled = !hasText;
+    }
+
+    composerInputStandard.addEventListener('input', updateSendButtonStateStandard);
+    updateSendButtonStateStandard();
+  </script>
+</body>
+</html>

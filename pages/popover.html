@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popover - Design System</title>
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/shadows.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../components/popover.css">
+  <style>
+    /* Page-specific styles */
+    .theme-toggle-wrapper {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drag-toggle {
+      width: 24px;
+      height: 16px;
+      background-color: var(--stroke-border-strong);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 2px;
+    }
+
+    .drag-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    .drag-toggle-slider {
+      width: 12px;
+      height: 12px;
+      background-color: var(--content-on-accent);
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+    }
+
+    .drag-toggle.active .drag-toggle-slider {
+      transform: translateY(-50%) translateX(8px);
+    }
+
+    .component-group {
+      gap: 24px;
+    }
+
+    .component-label {
+      color: var(--content-tertiary);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 40px;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .dragging {
+      opacity: 1;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transform: rotate(2deg);
+      box-shadow: var(--shadow-e2);
+      width: 280px !important;
+      background-color: var(--surface-popover-hover);
+    }
+
+    .list-item.drag-placeholder {
+      background-color: var(--surface-popover-hover);
+      height: 32px;
+      min-height: 32px;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle-wrapper">
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Dark Mode</span>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Drag</span>
+      <button class="drag-toggle" id="dragToggle" onclick="toggleDrag()">
+        <div class="drag-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Search</span>
+      <button class="drag-toggle" id="searchToggle" onclick="toggleSearch()">
+        <div class="drag-toggle-slider"></div>
+      </button>
+    </div>
+  </div>
+
+  <a href="../index.html" class="back-button text-caption">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.72424 3.08191C5.9182 2.95382 6.18228 2.97579 6.35315 3.14636C6.52401 3.31723 6.54577 3.58119 6.4176 3.77527L6.35315 3.85339L3.70667 6.49988H11.4996C11.7757 6.49988 11.9995 6.72381 11.9996 6.99988C11.9996 7.27602 11.7758 7.49988 11.4996 7.49988H3.70667L6.35315 10.1464C6.54841 10.3416 6.54841 10.6581 6.35315 10.8534C6.15788 11.0485 5.84133 11.0486 5.64612 10.8534L2.14612 7.35339L2.08167 7.27527C1.95378 7.08128 1.97549 6.81713 2.14612 6.64636L5.64612 3.14636L5.72424 3.08191Z" fill="currentColor"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="container">
+    <h1 class="page-title text-title">Popover</h1>
+
+    <div class="components-section">
+      <!-- Popover -->
+      <div class="component-group">
+        <div class="component-row">
+          <div class="popover" id="main-popover">
+            <!-- Search Input -->
+            <div class="popover-search" id="popoverSearch">
+              <input type="text" placeholder="Search views...">
+            </div>
+            
+            <!-- Content -->
+            <div class="popover-content">
+              <!-- Scrollable area - todas as seções exceto a última -->
+              <div class="popover-scrollable">
+                <!-- First Group - 6 items com avatar -->
+                <div class="popover-item-group" data-group="1">
+                  <div class="list-item" data-item="avatar-1">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                  
+                  <div class="list-item" data-item="avatar-2">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                  
+                  <div class="list-item" data-item="avatar-3">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                  
+                  <div class="list-item" data-item="avatar-4">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                  
+                  <div class="list-item" data-item="avatar-5">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                  
+                  <div class="list-item" data-item="avatar-6">
+                    <div class="list-item-avatar">
+                      <img src="../assets/linear-de8173e0-e2de-4488-83aa-7b62871551db.png" alt="Avatar">
+                    </div>
+                    <div class="list-item-text text-body">Item com avatar</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Separator -->
+              <hr class="popover-section-separator">
+              
+              <!-- Second Group - 3 items com icon (sticky) -->
+              <div class="popover-item-group" data-group="2">
+                <div class="list-item" data-item="icon-1">
+                  <div class="list-item-icon">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 2C7.27612 2 7.49996 2.22389 7.5 2.5V6.5H11.5C11.7761 6.5 12 6.72386 12 7C12 7.27614 11.7761 7.5 11.5 7.5H7.5V11.5C7.5 11.7761 7.27614 12 7 12C6.72386 12 6.5 11.7761 6.5 11.5V7.5H2.5C2.22386 7.5 2 7.27614 2 7C2 6.72386 2.22386 6.5 2.5 6.5H6.5V2.5C6.50004 2.22389 6.72388 2 7 2Z"/>
+                    </svg>
+                  </div>
+                  <div class="list-item-text text-body">Item com icon</div>
+                </div>
+                
+                <div class="list-item" data-item="icon-2">
+                  <div class="list-item-icon">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 2C7.27612 2 7.49996 2.22389 7.5 2.5V6.5H11.5C11.7761 6.5 12 6.72386 12 7C12 7.27614 11.7761 7.5 11.5 7.5H7.5V11.5C7.5 11.7761 7.27614 12 7 12C6.72386 12 6.5 11.7761 6.5 11.5V7.5H2.5C2.22386 7.5 2 7.27614 2 7C2 6.72386 2.22386 6.5 2.5 6.5H6.5V2.5C6.50004 2.22389 6.72388 2 7 2Z"/>
+                    </svg>
+                  </div>
+                  <div class="list-item-text text-body">Item com icon</div>
+                </div>
+                
+                <div class="list-item" data-item="icon-3">
+                  <div class="list-item-icon">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 2C7.27612 2 7.49996 2.22389 7.5 2.5V6.5H11.5C11.7761 6.5 12 6.72386 12 7C12 7.27614 11.7761 7.5 11.5 7.5H7.5V11.5C7.5 11.7761 7.27614 12 7 12C6.72386 12 6.5 11.7761 6.5 11.5V7.5H2.5C2.22386 7.5 2 7.27614 2 7C2 6.72386 2.22386 6.5 2.5 6.5H6.5V2.5C6.50004 2.22389 6.72388 2 7 2Z"/>
+                    </svg>
+                  </div>
+                  <div class="list-item-text text-body">Item com icon</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+  <script>
+    // Search Toggle
+    let searchEnabled = true;
+    
+    // Inicializar search do exemplo (pode ser true ou false)
+    const exampleSearch = document.getElementById('exampleSearch');
+    if (exampleSearch) {
+      exampleSearch.style.display = 'flex'; // true por padrão, pode mudar para 'none' para false
+    }
+
+    function toggleSearch() {
+      searchEnabled = !searchEnabled;
+      const toggle = document.getElementById('searchToggle');
+      const searchElement = document.getElementById('popoverSearch');
+      
+      if (searchEnabled) {
+        toggle.classList.add('active');
+        if (searchElement) {
+          searchElement.style.display = 'flex';
+          searchElement.querySelector('input')?.focus();
+        }
+      } else {
+        toggle.classList.remove('active');
+        if (searchElement) {
+          searchElement.style.display = 'none';
+        }
+      }
+    }
+
+    // Initialize search state
+    const searchToggle = document.getElementById('searchToggle');
+    if (searchToggle) {
+      searchToggle.classList.add('active');
+    }
+
+    // Auto-focus search inputs when popovers are displayed
+    document.querySelectorAll('.popover-search input').forEach(input => {
+      input.focus();
+    });
+
+    // Drag Toggle
+    let dragEnabled = false;
+    
+    // Drag and Drop functionality - Declarar variáveis ANTES das funções
+    let draggedElement = null;
+    let draggedGroup = null;
+    let dragPlaceholder = null;
+    let dragOffset = { x: 0, y: 0 };
+    let isDragging = false;
+    let dragStartY = 0;
+
+    function toggleDrag() {
+      dragEnabled = !dragEnabled;
+      console.log('toggleDrag called, dragEnabled:', dragEnabled);
+      const toggle = document.getElementById('dragToggle');
+      if (dragEnabled) {
+        toggle.classList.add('active');
+        enableDrag();
+      } else {
+        toggle.classList.remove('active');
+        disableDrag();
+      }
+    }
+
+    function createDragIcon() {
+      const dragIcon = document.createElement('div');
+      dragIcon.className = 'list-item-drag-icon';
+      dragIcon.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 11C8 10.4477 8.44772 10 9 10C9.55228 10 10 10.4477 10 11C10 11.5523 9.55228 12 9 12C8.44772 12 8 11.5523 8 11ZM8 7C8 6.44772 8.44772 6 9 6C9.55228 6 10 6.44772 10 7C10 7.55228 9.55228 8 9 8C8.44772 8 8 7.55228 8 7ZM8 3C8 2.44772 8.44772 2 9 2C9.55228 2 10 2.44772 10 3C10 3.55229 9.55228 4 9 4C8.44772 4 8 3.55229 8 3ZM4 11C4 10.4477 4.44772 10 5 10C5.55228 10 6 10.4477 6 11C6 11.5523 5.55228 12 5 12C4.44772 12 4 11.5523 4 11ZM4 7C4 6.44772 4.44772 6 5 6C5.55228 6 6 6.44772 6 7C6 7.55228 5.55228 8 5 8C4.44772 8 4 7.55228 4 7ZM4 3C4 2.44772 4.44772 2 5 2C5.55228 2 6 2.44772 6 3C6 3.55229 5.55228 4 5 4C4.44772 4 4 3.55229 4 3Z"/>
+        </svg>
+      `;
+      return dragIcon;
+    }
+
+    function enableDrag() {
+      console.log('enableDrag called');
+      // Aplicar apenas ao popover principal (main-popover)
+      const popover = document.getElementById('main-popover');
+      if (!popover) return;
+      
+      const items = popover.querySelectorAll('.list-item[data-item]');
+      console.log('Found items:', items.length);
+      
+      items.forEach(item => {
+        // Verificar se o item tem avatar ou é text only (sem icon)
+        const hasAvatar = item.querySelector('.list-item-avatar');
+        const hasIcon = item.querySelector('.list-item-icon');
+        
+        console.log('Item:', item, 'hasAvatar:', !!hasAvatar, 'hasIcon:', !!hasIcon);
+        
+        // Apenas habilitar drag para items com avatar ou text only (sem icon)
+        if (hasAvatar || !hasIcon) {
+          // Adicionar drag icon se não existir
+          if (!item.querySelector('.list-item-drag-icon')) {
+            const dragIcon = createDragIcon();
+            item.insertBefore(dragIcon, item.firstChild);
+          }
+          item.style.cursor = 'grab';
+          const dragIcon = item.querySelector('.list-item-drag-icon');
+          if (dragIcon) {
+            dragIcon.style.cursor = 'grab';
+            dragIcon.style.display = 'flex';
+          }
+          
+          // Remover listener antigo se existir
+          item.removeEventListener('mousedown', handleMouseDown);
+          
+          // Usar mousedown em vez de dragstart
+          item.addEventListener('mousedown', handleMouseDown);
+          
+          console.log('Added mousedown listener to item:', item);
+        } else {
+          // Desabilitar drag para items com icon
+          item.style.cursor = 'pointer';
+          const dragIcon = item.querySelector('.list-item-drag-icon');
+          if (dragIcon) {
+            dragIcon.remove();
+          }
+          item.removeEventListener('mousedown', handleMouseDown);
+        }
+      });
+    }
+    
+    function handleMouseDown(e) {
+      console.log('handleMouseDown called', e.target, dragEnabled, isDragging);
+      
+      if (!dragEnabled) {
+        console.log('Drag not enabled');
+        return;
+      }
+      
+      if (isDragging) {
+        console.log('Already dragging');
+        return;
+      }
+      
+      const item = e.currentTarget;
+      console.log('Item:', item);
+      
+      const hasAvatar = item.querySelector('.list-item-avatar');
+      const hasIcon = item.querySelector('.list-item-icon');
+      
+      console.log('hasAvatar:', !!hasAvatar, 'hasIcon:', !!hasIcon);
+      
+      // Apenas permitir drag para items com avatar ou text only (sem icon)
+      if (!hasAvatar && hasIcon) {
+        console.log('Item has icon, not draggable');
+        return;
+      }
+      
+      // Verificar se o clique foi no drag icon ou no item
+      const dragIcon = item.querySelector('.list-item-drag-icon');
+      const clickedOnDragIcon = dragIcon && (e.target === dragIcon || dragIcon.contains(e.target));
+      
+      console.log('clickedOnDragIcon:', clickedOnDragIcon, 'target:', e.target);
+      
+      // Permitir drag apenas se clicar no drag icon ou na área do item (mas não no texto)
+      if (!clickedOnDragIcon && e.target.closest('.list-item-text')) {
+        console.log('Clicked on text, ignoring');
+        return;
+      }
+      
+      console.log('Starting drag');
+      e.preventDefault();
+      
+      isDragging = true;
+      draggedElement = item;
+      draggedGroup = item.closest('.popover-item-group');
+      
+      if (!draggedGroup) {
+        isDragging = false;
+        draggedElement = null;
+        return;
+      }
+      
+      // Criar placeholder
+      dragPlaceholder = document.createElement('div');
+      dragPlaceholder.className = 'list-item drag-placeholder';
+      dragPlaceholder.style.height = item.offsetHeight + 'px';
+      dragPlaceholder.style.minHeight = item.offsetHeight + 'px';
+      
+      // Inserir placeholder no lugar do item
+      item.parentNode.insertBefore(dragPlaceholder, item);
+      
+      // Calcular offset do cursor
+      const rect = item.getBoundingClientRect();
+      dragOffset.x = e.clientX - rect.left;
+      dragOffset.y = e.clientY - rect.top;
+      dragStartY = e.clientY;
+      
+      // Posicionar item para seguir cursor
+      item.classList.add('dragging');
+      item.style.width = rect.width + 'px';
+      item.style.position = 'fixed';
+      item.style.zIndex = '10000';
+      item.style.pointerEvents = 'none';
+      item.style.left = rect.left + 'px';
+      item.style.top = rect.top + 'px';
+      
+      // Adicionar listeners globais
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+    
+    function handleMouseMove(e) {
+      if (!isDragging || !draggedElement) return;
+      
+      e.preventDefault();
+      
+      // Atualizar posição do item
+      draggedElement.style.left = (e.clientX - dragOffset.x) + 'px';
+      draggedElement.style.top = (e.clientY - dragOffset.y) + 'px';
+      
+      // Encontrar elemento após o qual inserir
+      const afterElement = getDragAfterElement(draggedGroup, e.clientY);
+      
+      if (afterElement == null) {
+        // Inserir no final
+        if (!dragPlaceholder.parentNode || dragPlaceholder.parentNode !== draggedGroup) {
+          draggedGroup.appendChild(dragPlaceholder);
+        } else if (dragPlaceholder.nextSibling) {
+          draggedGroup.appendChild(dragPlaceholder);
+        }
+      } else {
+        // Inserir antes do elemento
+        if (dragPlaceholder !== afterElement.previousSibling) {
+          draggedGroup.insertBefore(dragPlaceholder, afterElement);
+        }
+      }
+    }
+    
+    function handleMouseUp(e) {
+      if (!isDragging || !draggedElement) return;
+      
+      e.preventDefault();
+      
+      // Mover item para o lugar do placeholder
+      if (dragPlaceholder && dragPlaceholder.parentNode && draggedElement) {
+        dragPlaceholder.parentNode.insertBefore(draggedElement, dragPlaceholder);
+        dragPlaceholder.remove();
+      } else if (dragPlaceholder) {
+        dragPlaceholder.remove();
+      }
+      
+      // Remover estilos de dragging
+      if (draggedElement) {
+        draggedElement.classList.remove('dragging');
+        draggedElement.style.left = '';
+        draggedElement.style.top = '';
+        draggedElement.style.width = '';
+        draggedElement.style.position = '';
+        draggedElement.style.zIndex = '';
+        draggedElement.style.pointerEvents = '';
+      }
+      
+      
+      // Remover listeners globais
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      
+      // Limpar variáveis
+      isDragging = false;
+      draggedElement = null;
+      draggedGroup = null;
+      dragPlaceholder = null;
+    }
+    
+
+    function disableDrag() {
+      // Cancelar drag se estiver ativo
+      if (isDragging) {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        isDragging = false;
+        draggedElement = null;
+        draggedGroup = null;
+        if (dragPlaceholder) {
+          dragPlaceholder.remove();
+          dragPlaceholder = null;
+        }
+      }
+      
+      document.querySelectorAll('.list-item[data-item]').forEach(item => {
+        // Remover drag icon
+        const dragIcon = item.querySelector('.list-item-drag-icon');
+        if (dragIcon) {
+          dragIcon.remove();
+        }
+        item.style.cursor = 'pointer';
+        // Remover event listener
+        item.removeEventListener('mousedown', handleMouseDown);
+      });
+    }
+
+    // Initialize drag state
+    disableDrag();
+
+
+    function getDragAfterElement(container, y) {
+      if (!container) return null;
+      
+      // Apenas considerar items com avatar ou text only (sem icon) como draggable
+      const allItems = [...container.querySelectorAll('.list-item[data-item]:not(.dragging)')];
+      const draggableElements = allItems.filter(item => {
+        const hasAvatar = item.querySelector('.list-item-avatar');
+        const hasIcon = item.querySelector('.list-item-icon');
+        return hasAvatar || !hasIcon;
+      });
+      
+      return draggableElements.reduce((closest, child) => {
+        if (child === dragPlaceholder) return closest;
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+  </script>
+</body>
+</html>

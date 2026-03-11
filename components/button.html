@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button - Design System</title>
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="button.css">
+  <style>
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: var(--content-primary);
+    }
+
+    .subtitle {
+      color: var(--content-secondary);
+      margin-bottom: 40px;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: var(--content-primary);
+      border-bottom: 1px solid var(--stroke-primary);
+      padding-bottom: 8px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+
+    .button-group-label {
+      min-width: 200px;
+      font-weight: 500;
+      color: var(--content-secondary);
+      font-size: 14px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .demo-section {
+      background-color: var(--surface-secondary);
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .demo-label {
+      font-size: 12px;
+      color: var(--content-tertiary);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Icon SVG */
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+    }
+
+    .icon-sm {
+      width: 12px;
+      height: 12px;
+    }
+
+    .icon-lg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .icon-xl {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Theme Toggle Wrapper */
+    .theme-toggle-wrapper {
+      position: fixed !important;
+      top: 20px !important;
+      right: 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      gap: 12px !important;
+      z-index: 10000 !important;
+      background: transparent !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .toggle-group {
+      display: flex !important;
+      align-items: center;
+      gap: 12px;
+      width: auto;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .toggle-label {
+      color: var(--content-quaternary);
+      user-select: none;
+      transition: color 0.2s ease;
+      font-size: 12px;
+      font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    [data-theme="dark"] .toggle-label {
+      color: var(--content-primary);
+    }
+
+    .icon-toggle {
+      width: 24px !important;
+      height: 16px !important;
+      background-color: var(--stroke-border-strong) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 2px;
+      flex-shrink: 0;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      min-width: 24px;
+      min-height: 16px;
+    }
+
+    .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    [data-theme="dark"] .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    .icon-toggle-slider {
+      width: 12px;
+      height: 12px;
+      background-color: var(--content-on-accent);
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+      display: block;
+    }
+
+    .icon-toggle.active .icon-toggle-slider {
+      transform: translateY(-50%) translateX(8px);
+    }
+    
+    .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    [data-theme="dark"] .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    /* Hide icons when toggles are off */
+    .hide-left-icon .btn-icon-left {
+      display: none;
+    }
+
+    .hide-right-icon .btn-icon-right {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle-wrapper" style="position: fixed !important; top: 20px !important; right: 20px !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 12px !important; z-index: 10000 !important;">
+    <div class="toggle-group" style="display: flex !important; align-items: center !important; gap: 12px !important;">
+      <span class="toggle-label">Dark Mode</span>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group" style="display: flex !important; align-items: center !important; gap: 12px !important; visibility: visible !important; opacity: 1 !important;">
+      <span class="toggle-label" style="color: #6B7280 !important; font-size: 12px !important; display: inline-block !important;">Left Icon</span>
+      <button class="icon-toggle active" id="leftIconToggle" onclick="toggleLeftIcon()" style="width: 24px !important; height: 16px !important; background-color: #3B82F6 !important; border: none !important; border-radius: 8px !important; position: relative !important; padding: 2px !important; display: block !important; visibility: visible !important; opacity: 1 !important; cursor: pointer !important;">
+        <div class="icon-toggle-slider" style="width: 12px !important; height: 12px !important; background-color: white !important; border-radius: 50% !important; position: absolute !important; top: 50% !important; left: 2px !important; transform: translateY(-50%) translateX(8px) !important; display: block !important;"></div>
+      </button>
+    </div>
+    <div class="toggle-group" style="display: flex !important; align-items: center !important; gap: 12px !important; visibility: visible !important; opacity: 1 !important;">
+      <span class="toggle-label" style="color: #6B7280 !important; font-size: 12px !important; display: inline-block !important;">Right Icon</span>
+      <button class="icon-toggle active" id="rightIconToggle" onclick="toggleRightIcon()" style="width: 24px !important; height: 16px !important; background-color: #3B82F6 !important; border: none !important; border-radius: 8px !important; position: relative !important; padding: 2px !important; display: block !important; visibility: visible !important; opacity: 1 !important; cursor: pointer !important;">
+        <div class="icon-toggle-slider" style="width: 12px !important; height: 12px !important; background-color: white !important; border-radius: 50% !important; position: absolute !important; top: 50% !important; left: 2px !important; transform: translateY(-50%) translateX(8px) !important; display: block !important;"></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Button Components</h1>
+    <p class="subtitle">Todas as variantes, tamanhos e estados dos botões</p>
+
+    <!-- Primary Buttons -->
+    <div class="section">
+      <h2 class="section-title">Primary Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-primary btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Buttons -->
+    <div class="section">
+      <h2 class="section-title">Secondary Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-secondary btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ghost Buttons -->
+    <div class="section">
+      <h2 class="section-title">Ghost Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-ghost btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Destructive Buttons -->
+    <div class="section">
+      <h2 class="section-title">Destructive Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Destructive Secondary Buttons -->
+    <div class="section">
+      <h2 class="section-title">Destructive Secondary Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-destructive-secondary btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placeholder Buttons -->
+    <div class="section">
+      <h2 class="section-title">Placeholder Buttons</h2>
+      
+      <div class="demo-section">
+        <div class="demo-label">Size 20</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-20">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-20" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-20" disabled>
+              <span class="btn-icon btn-icon-left icon icon-sm">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-sm">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 28</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-28">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-28" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-28" disabled>
+              <span class="btn-icon btn-icon-left icon">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 32</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-32">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-32" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-32" disabled>
+              <span class="btn-icon btn-icon-left icon icon-lg">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-lg">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-label">Size 36</div>
+        <div class="button-group">
+          <span class="button-group-label">Default</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-36">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Hover</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-36" style="pointer-events: none;">
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <span class="button-group-label">Disabled</span>
+          <div class="button-row">
+            <button class="btn btn-placeholder btn-size-36" disabled>
+              <span class="btn-icon btn-icon-left icon icon-xl">→</span>
+              Button
+              <span class="btn-icon btn-icon-right icon icon-xl">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    function toggleLeftIcon() {
+      const toggle = document.getElementById('leftIconToggle');
+      const body = document.body;
+      toggle.classList.toggle('active');
+      body.classList.toggle('hide-left-icon');
+      localStorage.setItem('leftIconVisible', toggle.classList.contains('active'));
+    }
+
+    function toggleRightIcon() {
+      const toggle = document.getElementById('rightIconToggle');
+      const body = document.body;
+      toggle.classList.toggle('active');
+      body.classList.toggle('hide-right-icon');
+      localStorage.setItem('rightIconVisible', toggle.classList.contains('active'));
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Load saved icon visibility states
+    const leftIconVisible = localStorage.getItem('leftIconVisible') !== 'false';
+    const rightIconVisible = localStorage.getItem('rightIconVisible') !== 'false';
+    
+    if (!leftIconVisible) {
+      document.getElementById('leftIconToggle').classList.remove('active');
+      document.body.classList.add('hide-left-icon');
+    }
+    
+    if (!rightIconVisible) {
+      document.getElementById('rightIconToggle').classList.remove('active');
+      document.body.classList.add('hide-right-icon');
+    }
+  </script>
+</body>
+</html>

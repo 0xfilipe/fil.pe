@@ -1,0 +1,560 @@
+:root {
+  /* Amber Palette */
+  --amber-01: #FDF7C4;
+  --amber-02: #FCEF7E;
+  --amber-03: #F5E242;
+  --amber-04: #CFB700;
+  --amber-05: #A89500;
+  --amber-06: #8C7D00;
+  --amber-07: #665A00;
+  --amber-08: #423E17;
+  --amber-09: #373313;
+
+  /* Blue Palette */
+  --blue-01: #E5EEFF;
+  --blue-02: #D6E5FF;
+  --blue-03: #C2D6FF;
+  --blue-04: #80ACFF;
+  --blue-05: #4E8CFC;
+  --blue-06: #266DF0;
+  --blue-07: #215BC4;
+  --blue-08: #2B3E6D;
+  --blue-09: #1D2E55;
+
+  /* Green Palette */
+  --green-01: #E0FCED;
+  --green-02: #CBF7E1;
+  --green-03: #A7F2CF;
+  --green-04: #4AD99A;
+  --green-05: #00D17E;
+  --green-06: #02AD6E;
+  --green-07: #007D53;
+  --green-08: #244A3A;
+  --green-09: #1D4034;
+
+  /* Cyan Palette */
+  --cyan-01: #DDF7FF;
+  --cyan-02: #D0EFF7;
+  --cyan-03: #A9EBFC;
+  --cyan-04: #40CFF5;
+  --cyan-05: #00B9EB;
+  --cyan-06: #0D99BD;
+  --cyan-07: #056C87;
+  --cyan-08: #0A4E6B;
+  --cyan-09: #1A3946;
+
+  /* Lavender Palette */
+  --lavender-01: #FDEDFF;
+  --lavender-02: #FAD6FF;
+  --lavender-03: #F6BDFC;
+  --lavender-04: #F16BFF;
+  --lavender-05: #DB4BEB;
+  --lavender-06: #CD33DE;
+  --lavender-07: #9C1BAB;
+  --lavender-08: #5C2169;
+  --lavender-09: #431B4B;
+
+  /* Lime Palette */
+  --lime-01: #F4FBCB;
+  --lime-02: #E9F797;
+  --lime-03: #D7EB67;
+  --lime-04: #AABF2A;
+  --lime-05: #89A100;
+  --lime-06: #748700;
+  --lime-07: #536300;
+  --lime-08: #3B4217;
+  --lime-09: #2F3802;
+
+  /* Orange Palette */
+  --orange-01: #FEEEE1;
+  --orange-02: #FEE0C8;
+  --orange-03: #FFC89E;
+  --orange-04: #FF9340;
+  --orange-05: #F97514;
+  --orange-06: #C95908;
+  --orange-07: #9E3F00;
+  --orange-08: #593217;
+  --orange-09: #432410;
+
+  /* Pink Palette */
+  --pink-01: #FEECF3;
+  --pink-02: #FDDDEA;
+  --pink-03: #FFBFDA;
+  --pink-04: #FF73AD;
+  --pink-05: #FA4B94;
+  --pink-06: #E0387E;
+  --pink-07: #B81C5D;
+  --pink-08: #642640;
+  --pink-09: #4E1B30;
+
+  /* Purple Palette */
+  --purple-01: #F5F0FF;
+  --purple-02: #E8DDFE;
+  --purple-03: #D8C4FF;
+  --purple-04: #B28CFF;
+  --purple-05: #9B69FF;
+  --purple-06: #864AFF;
+  --purple-07: #6238B5;
+  --purple-08: #45297D;
+  --purple-09: #2F1E5A;
+
+  /* Red Palette */
+  --red-01: #FFEBEB;
+  --red-02: #FFDCDB;
+  --red-03: #FFD1D1;
+  --red-04: #FF8180;
+  --red-05: #FF5454;
+  --red-06: #ED3B3B;
+  --red-07: #BA2525;
+  --red-08: #692623;
+  --red-09: #4E1B28;
+
+  /* Yellow Palette */
+  --yellow-01: #FFF3CC;
+  --yellow-02: #FFE59E;
+  --yellow-03: #FFD269;
+  --yellow-04: #F5A300;
+  --yellow-05: #CF8300;
+  --yellow-06: #B06A00;
+  --yellow-07: #874D00;
+  --yellow-08: #523817;
+  --yellow-09: #3A2D12;
+
+  /* Grey Palette */
+  --grey-00: #FFFFFF;
+  --grey-01: #FBFBFB;
+  --grey-02: #F8F9FA;
+  --grey-03: #F1F2F3;
+  --grey-04: #EEEFF1;
+  --grey-05: #E6E7EA;
+  --grey-06: #CDCED2;
+  --grey-07: #A2A4A7;
+  --grey-08: #898A8D;
+  --grey-09: #77797C;
+  --grey-10: #505155;
+  --grey-11: #45474B;
+  --grey-12: #2F3033;
+  --grey-13: #292A2E;
+  --grey-14: #242629;
+  --grey-15: #202124;
+  --grey-16: #1C1D1F;
+  --grey-17: #17181A;
+  --grey-18: #000000;
+}
+
+/* Light Mode - Default semantic color mappings */
+:root,
+[data-theme="light"] {
+  /* Background Colors */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #EEEEEE;
+
+  /* Text Colors */
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+
+  /* Border Colors */
+  --border-primary: #E0E0E0;
+  --border-secondary: #CCCCCC;
+
+  /* Surface Colors */
+  --surface-primary: var(--grey-00);
+  --surface-primary-transparent: rgba(255, 255, 255, 0.55);
+  --surface-primary-hover: var(--grey-01);
+  --surface-secondary: var(--grey-01);
+  --surface-secondary-transparent: rgba(251, 251, 251, 0.8);
+  --surface-secondary-hover: var(--grey-04);
+  --surface-tertiary: var(--grey-02);
+  --surface-tertiary-hover: var(--grey-05);
+  --surface-quaternary: var(--grey-03);
+  --surface-accent: var(--blue-06);
+  --surface-accent-selected: rgba(38, 109, 240, 0.1);
+  --surface-accent-selected-subtle: rgba(38, 109, 240, 0.04);
+  --surface-popover: var(--grey-00);
+  --surface-popover-hover: var(--grey-02);
+  --surface-editor: var(--grey-01);
+  --surface-accent-subtle: var(--blue-01);
+  --surface-enriched: rgba(155, 105, 255, 0.04);
+  --surface-floating: var(--grey-16);
+  --surface-floating-hover: rgba(255, 255, 255, 0.1);
+  --surface-overlay: rgba(0, 0, 0, 0.25);
+  --surface-overlay-strong: rgba(0, 0, 0, 0.82);
+  --surface-frame: var(--grey-12);
+  --surface-frame-overlay: rgba(0, 0, 0, 0.55);
+  --surface-info-subtle: var(--blue-01);
+  --surface-success-subtle: var(--green-01);
+  --surface-warning-subtle: var(--yellow-01);
+  --surface-critical-subtle: var(--red-01);
+  --surface-tint: rgba(0, 0, 0, 0.04);
+
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+
+  /* Button Colors */
+  /* Accent Button */
+  --button-accent: var(--blue-06);
+  --button-accent-hover: var(--blue-07);
+  --button-accent-subtle: var(--blue-01);
+
+  /* Critical Button */
+  --button-critical: var(--red-05);
+  --button-critical-hover: var(--red-06);
+  --button-critical-subtle: var(--red-01);
+
+  /* Secondary Button */
+  --button-secondary: var(--grey-00);
+  --button-secondary-hover: var(--grey-02);
+
+  /* Ghost Button */
+  --button-ghost: rgba(0, 0, 0, 0);
+  --button-ghost-hover: rgba(0, 0, 0, 0.05);
+  --button-ghost-hover-subtle: rgba(0, 0, 0, 0.03);
+
+  /* Frame Button */
+  --button-frame: var(--grey-12);
+  --button-frame-hover: var(--grey-15);
+
+  /* Stroke Colors */
+  /* Primary Strokes */
+  --stroke-primary: var(--grey-04);
+  --stroke-secondary: var(--grey-05);
+  --stroke-tertiary: var(--grey-06);
+  --stroke-primary-subtle: var(--grey-02);
+  --stroke-primary-transparent: rgba(0, 0, 0, 0.05);
+  --stroke-border-strong: rgba(0, 0, 0, 0.1);
+  --stroke-border-ghost: transparent;
+
+  /* Popover & Frame Strokes */
+  --stroke-popover: var(--grey-04);
+  --stroke-frame-border: var(--grey-17);
+  --stroke-frame-button-border: var(--grey-17);
+
+  /* Accent Strokes */
+  --stroke-accent: var(--blue-06);
+  --stroke-accent-subtle: var(--blue-02);
+  --stroke-on-accent: rgba(255, 255, 255, 0.15);
+
+  /* Status Strokes */
+  --stroke-info: var(--blue-02);
+  --stroke-success: var(--green-02);
+  --stroke-warning: var(--yellow-02);
+  --stroke-critical: var(--red-03);
+
+  /* Floating Strokes */
+  --stroke-floating-primary: rgba(255, 255, 255, 0.05);
+  --stroke-floating-secondary: rgba(255, 255, 255, 0.1);
+  --stroke-floating-tertiary: rgba(255, 255, 255, 0.2);
+
+  /* Content Colors */
+  /* Primary Content */
+  --content-primary: var(--grey-14);
+  --content-secondary: var(--grey-10);
+  --content-tertiary: rgba(0, 0, 0, 0.55);
+  --content-quaternary: rgba(0, 0, 0, 0.4);
+
+  /* Accent Content */
+  --content-accent: var(--blue-06);
+  --content-on-accent: var(--grey-00);
+
+  /* Floating Content */
+  --content-floating-primary: var(--grey-04);
+
+  /* Inverse Content */
+  --content-inverse: var(--grey-00);
+
+  /* Status Content */
+  --content-info: var(--blue-06);
+  --content-success: var(--green-06);
+  --content-critical: var(--red-06);
+  --content-warning: var(--yellow-05);
+
+  /* On Subtle Status Content */
+  --content-on-info-subtle: var(--blue-07);
+  --content-on-success-subtle: var(--green-07);
+  --content-on-warning-subtle: var(--yellow-07);
+  --content-on-critical-subtle: var(--red-07);
+
+  /* Ghost Content */
+  --content-ghost: rgba(0, 0, 0, 0.55);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  /* Background Colors */
+  --bg-primary: #1A1A1A;
+  --bg-secondary: #242424;
+  --bg-tertiary: #2E2E2E;
+
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+  --text-tertiary: #999999;
+
+  /* Border Colors */
+  --border-primary: #3A3A3A;
+  --border-secondary: #4A4A4A;
+
+  /* Surface Colors */
+  --surface-primary: var(--grey-16);
+  --surface-primary-transparent: rgba(26, 29, 33, 0.6);
+  --surface-primary-hover: var(--grey-15);
+  --surface-secondary: var(--grey-17);
+  --surface-secondary-transparent: rgba(21, 24, 28, 0.8);
+  --surface-secondary-hover: var(--grey-14);
+  --surface-tertiary: var(--grey-17);
+  --surface-tertiary-hover: var(--grey-14);
+  --surface-quaternary: var(--grey-18);
+  --surface-accent: var(--blue-06);
+  --surface-accent-selected: rgba(38, 109, 240, 0.1);
+  --surface-accent-selected-subtle: rgba(38, 109, 240, 0.06);
+  --surface-popover: var(--grey-15);
+  --surface-popover-hover: var(--grey-13);
+  --surface-editor: var(--grey-17);
+  --surface-accent-subtle: var(--blue-09);
+  --surface-enriched: rgba(155, 105, 255, 0.06);
+  --surface-floating: var(--grey-16);
+  --surface-floating-hover: rgba(255, 255, 255, 0.1);
+  --surface-overlay: rgba(0, 0, 0, 0.55);
+  --surface-overlay-strong: rgba(0, 0, 0, 0.82);
+  --surface-frame: var(--grey-12);
+  --surface-frame-overlay: rgba(0, 0, 0, 0.55);
+  --surface-info-subtle: var(--blue-09);
+  --surface-success-subtle: var(--green-09);
+  --surface-warning-subtle: var(--yellow-09);
+  --surface-critical-subtle: var(--red-09);
+  --surface-tint: rgba(255, 255, 255, 0.05);
+
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.3);
+  --shadow-md: rgba(0, 0, 0, 0.4);
+  --shadow-lg: rgba(0, 0, 0, 0.5);
+
+  /* Button Colors */
+  /* Accent Button */
+  --button-accent: var(--blue-06);
+  --button-accent-hover: var(--blue-05);
+  --button-accent-subtle: var(--blue-09);
+
+  /* Critical Button */
+  --button-critical: var(--red-06);
+  --button-critical-hover: var(--red-05);
+  --button-critical-subtle: var(--red-09);
+
+  /* Secondary Button */
+  --button-secondary: var(--grey-16);
+  --button-secondary-hover: var(--grey-13);
+
+  /* Ghost Button */
+  --button-ghost: rgba(255, 255, 255, 0);
+  --button-ghost-hover: rgba(255, 255, 255, 0.05);
+  --button-ghost-hover-subtle: rgba(255, 255, 255, 0.03);
+
+  /* Frame Button */
+  --button-frame: var(--grey-12);
+  --button-frame-hover: var(--grey-15);
+
+  /* Stroke Colors */
+  /* Primary Strokes */
+  --stroke-primary: var(--grey-13);
+  --stroke-secondary: var(--grey-12);
+  --stroke-tertiary: var(--grey-11);
+  --stroke-primary-subtle: var(--grey-14);
+  --stroke-primary-transparent: rgba(255, 255, 255, 0.05);
+  --stroke-border-strong: rgba(255, 255, 255, 0.1);
+  --stroke-border-ghost: var(--grey-13);
+
+  /* Popover & Frame Strokes */
+  --stroke-popover: var(--grey-13);
+  --stroke-frame-border: var(--grey-18);
+  --stroke-frame-button-border: var(--grey-11);
+
+  /* Accent Strokes */
+  --stroke-accent: var(--blue-06);
+  --stroke-accent-subtle: var(--blue-08);
+  --stroke-on-accent: rgba(255, 255, 255, 0.15);
+
+  /* Status Strokes */
+  --stroke-info: var(--blue-08);
+  --stroke-success: var(--green-08);
+  --stroke-warning: var(--yellow-08);
+  --stroke-critical: var(--red-08);
+
+  /* Floating Strokes */
+  --stroke-floating-primary: rgba(255, 255, 255, 0.05);
+  --stroke-floating-secondary: rgba(255, 255, 255, 0.1);
+  --stroke-floating-tertiary: rgba(255, 255, 255, 0.2);
+
+  /* Content Colors */
+  /* Primary Content */
+  --content-primary: var(--grey-04);
+  --content-secondary: var(--grey-07);
+  --content-tertiary: rgba(255, 255, 255, 0.55);
+  --content-quaternary: rgba(255, 255, 255, 0.29);
+
+  /* Accent Content */
+  --content-accent: var(--blue-05);
+  --content-on-accent: var(--grey-00);
+
+  /* Floating Content */
+  --content-floating-primary: var(--grey-04);
+
+  /* Inverse Content */
+  --content-inverse: var(--grey-16);
+
+  /* Status Content */
+  --content-info: var(--blue-05);
+  --content-success: var(--green-05);
+  --content-critical: var(--red-05);
+  --content-warning: var(--yellow-05);
+
+  /* On Subtle Status Content */
+  --content-on-info-subtle: var(--blue-03);
+  --content-on-success-subtle: var(--green-03);
+  --content-on-warning-subtle: var(--yellow-03);
+  --content-on-critical-subtle: var(--red-03);
+
+  /* Ghost Content */
+  --content-ghost: rgba(255, 255, 255, 0.55);
+}
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Background Colors */
+    --bg-primary: #1A1A1A;
+    --bg-secondary: #242424;
+    --bg-tertiary: #2E2E2E;
+
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCCCCC;
+    --text-tertiary: #999999;
+
+    /* Border Colors */
+    --border-primary: #3A3A3A;
+    --border-secondary: #4A4A4A;
+
+    /* Surface Colors */
+    --surface-primary: var(--grey-16);
+    --surface-primary-transparent: rgba(26, 29, 33, 0.6);
+    --surface-primary-hover: var(--grey-15);
+    --surface-secondary: var(--grey-17);
+    --surface-secondary-transparent: rgba(21, 24, 28, 0.8);
+    --surface-secondary-hover: var(--grey-14);
+    --surface-tertiary: var(--grey-17);
+    --surface-tertiary-hover: var(--grey-14);
+    --surface-quaternary: var(--grey-18);
+    --surface-accent: var(--blue-06);
+    --surface-accent-selected: rgba(38, 109, 240, 0.1);
+    --surface-accent-selected-subtle: rgba(38, 109, 240, 0.06);
+    --surface-popover: var(--grey-15);
+    --surface-popover-hover: var(--grey-13);
+    --surface-editor: var(--grey-17);
+    --surface-accent-subtle: var(--blue-09);
+    --surface-enriched: rgba(155, 105, 255, 0.06);
+    --surface-floating: var(--grey-16);
+    --surface-floating-hover: rgba(255, 255, 255, 0.1);
+    --surface-overlay: rgba(0, 0, 0, 0.55);
+    --surface-overlay-strong: rgba(0, 0, 0, 0.82);
+    --surface-frame: var(--grey-12);
+    --surface-frame-overlay: rgba(0, 0, 0, 0.55);
+    --surface-info-subtle: var(--blue-09);
+    --surface-success-subtle: var(--green-09);
+    --surface-warning-subtle: var(--yellow-09);
+    --surface-critical-subtle: var(--red-09);
+    --surface-tint: rgba(255, 255, 255, 0.05);
+
+    /* Shadow Colors */
+    --shadow-sm: rgba(0, 0, 0, 0.3);
+    --shadow-md: rgba(0, 0, 0, 0.4);
+    --shadow-lg: rgba(0, 0, 0, 0.5);
+
+    /* Button Colors */
+    /* Accent Button */
+    --button-accent: var(--blue-06);
+    --button-accent-hover: var(--blue-05);
+    --button-accent-subtle: var(--blue-09);
+
+    /* Critical Button */
+    --button-critical: var(--red-06);
+    --button-critical-hover: var(--red-05);
+    --button-critical-subtle: var(--red-09);
+
+    /* Secondary Button */
+    --button-secondary: var(--grey-16);
+    --button-secondary-hover: var(--grey-13);
+
+    /* Ghost Button */
+    --button-ghost: rgba(255, 255, 255, 0);
+    --button-ghost-hover: rgba(255, 255, 255, 0.05);
+    --button-ghost-hover-subtle: rgba(255, 255, 255, 0.03);
+
+    /* Frame Button */
+    --button-frame: var(--grey-12);
+    --button-frame-hover: var(--grey-15);
+
+    /* Stroke Colors */
+    /* Primary Strokes */
+    --stroke-primary: var(--grey-13);
+    --stroke-secondary: var(--grey-12);
+    --stroke-tertiary: var(--grey-11);
+    --stroke-primary-subtle: var(--grey-14);
+    --stroke-primary-transparent: rgba(255, 255, 255, 0.05);
+    --stroke-border-strong: rgba(255, 255, 255, 0.1);
+    --stroke-border-ghost: var(--grey-13);
+
+    /* Popover & Frame Strokes */
+    --stroke-popover: var(--grey-13);
+    --stroke-frame-border: var(--grey-18);
+    --stroke-frame-button-border: var(--grey-11);
+
+    /* Accent Strokes */
+    --stroke-accent: var(--blue-06);
+    --stroke-accent-subtle: var(--blue-08);
+    --stroke-on-accent: rgba(255, 255, 255, 0.15);
+
+    /* Status Strokes */
+    --stroke-info: var(--blue-08);
+    --stroke-success: var(--green-08);
+    --stroke-warning: var(--yellow-08);
+    --stroke-critical: var(--red-08);
+
+    /* Floating Strokes */
+    --stroke-floating-primary: rgba(255, 255, 255, 0.05);
+    --stroke-floating-secondary: rgba(255, 255, 255, 0.1);
+    --stroke-floating-tertiary: rgba(255, 255, 255, 0.2);
+
+    /* Content Colors */
+    /* Primary Content */
+    --content-primary: var(--grey-04);
+    --content-secondary: var(--grey-07);
+    --content-tertiary: rgba(255, 255, 255, 0.55);
+    --content-quaternary: rgba(255, 255, 255, 0.29);
+
+    /* Accent Content */
+    --content-accent: var(--blue-05);
+    --content-on-accent: var(--grey-00);
+
+    /* Inverse Content */
+    --content-inverse: var(--grey-16);
+
+    /* Status Content */
+    --content-info: var(--blue-05);
+    --content-success: var(--green-05);
+    --content-critical: var(--red-05);
+    --content-warning: var(--yellow-05);
+
+    /* On Subtle Status Content */
+    --content-on-info-subtle: var(--blue-03);
+    --content-on-success-subtle: var(--green-03);
+    --content-on-warning-subtle: var(--yellow-03);
+    --content-on-critical-subtle: var(--red-03);
+
+    /* Ghost Content */
+    --content-ghost: rgba(255, 255, 255, 0.55);
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chip - Attio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/shadows.css">
+  <link rel="stylesheet" href="chip.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--surface-primary);
+      color: var(--content-primary);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .component-section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-family: var(--font-family);
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      font-weight: var(--font-weight-semibold);
+      color: var(--content-primary);
+      margin-bottom: 20px;
+    }
+
+    .component-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .component-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .component-label {
+      font-family: var(--font-family);
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      font-weight: var(--font-weight-medium);
+      color: var(--content-tertiary);
+    }
+  </style>
+</head>
+<body>
+  <div class="component-section">
+    <h2 class="section-title">Ghost Chip</h2>
+    <div class="component-grid">
+      <div class="component-item">
+        <span class="component-label">Default</span>
+        <button class="chip chip-ghost">
+          <img src="../assets/cursor.png" alt="" class="chip-avatar" />
+          <span class="chip-text">John Doe</span>
+        </button>
+      </div>
+      <div class="component-item">
+        <span class="component-label">With Link</span>
+        <button class="chip chip-ghost">
+          <img src="../assets/cursor.png" alt="" class="chip-avatar" />
+          <span class="chip-text chip-text-link">John Doe</span>
+        </button>
+      </div>
+      <div class="component-item">
+        <span class="component-label">Square Avatar</span>
+        <button class="chip chip-ghost">
+          <img src="../assets/cursor.png" alt="" class="chip-avatar-square" />
+          <span class="chip-text">John Doe</span>
+        </button>
+      </div>
+      <div class="component-item">
+        <span class="component-label">Hover</span>
+        <button class="chip chip-ghost" style="background-color: var(--button-ghost-hover);">
+          <img src="../assets/cursor.png" alt="" class="chip-avatar" />
+          <span class="chip-text">John Doe</span>
+        </button>
+      </div>
+      <div class="component-item">
+        <span class="component-label">Focus</span>
+        <button class="chip chip-ghost" style="outline: 2px solid var(--button-accent); outline-offset: 2px;">
+          <img src="../assets/cursor.png" alt="" class="chip-avatar" />
+          <span class="chip-text">John Doe</span>
+        </button>
+      </div>
+      <div class="component-item">
+        <span class="component-label">Disabled</span>
+        <button class="chip chip-ghost" disabled>
+          <img src="../assets/cursor.png" alt="" class="chip-avatar" />
+          <span class="chip-text">John Doe</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

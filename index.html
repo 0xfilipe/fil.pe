@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fil.pe</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System - Attio</title>
+  <link rel="stylesheet" href="tokens/colors.css">
+  <link rel="stylesheet" href="tokens/typography.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <p>hi world</p>
+  <div class="theme-toggle-wrapper">
+    <span class="theme-toggle-label text-caption">Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <div class="theme-toggle-slider"></div>
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <h2 class="section-title text-caption">Styles</h2>
+      <nav class="links-list">
+        <a href="pages/shadows.html" class="link-item text-body">Shadows</a>
+        <a href="pages/typography.html" class="link-item text-body">Typography</a>
+        <a href="pages/colors.html" class="link-item text-body">Palette</a>
+        <a href="pages/icons.html" class="link-item text-body">Icons</a>
+        <a href="pages/tokens.html" class="link-item text-body">Color Tokens</a>
+      </nav>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title text-caption">Components</h2>
+      <nav class="links-list">
+        <a href="pages/buttons.html" class="link-item text-body">Buttons</a>
+        <a href="components/avatar.html" class="link-item text-body">Avatar</a>
+        <a href="components/iconButton.html" class="link-item text-body">Icon Button</a>
+        <a href="pages/chip.html" class="link-item text-body">Chip</a>
+        <a href="components/topbar.html" class="link-item text-body">Topbar</a>
+        <a href="components/askAttioComposer.html" class="link-item text-body">Ask Attio Composer</a>
+        <a href="pages/popover.html" class="link-item text-body">Popover</a>
+        <a href="components/sidebar.html" class="link-item text-body">Sidebar</a>
+        <a href="components/tooltip.html" class="link-item text-body">Tooltip</a>
+      </nav>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title text-caption">Pages</h2>
+      <nav class="links-list">
+        <a href="pages/home.html" class="link-item text-body">Home</a>
+        <a href="pages/page-template.html" class="link-item text-body">Page Template</a>
+      </nav>
+    </div>
+  </div>
+
+  <script src="scripts/script.js"></script>
 </body>
 </html>

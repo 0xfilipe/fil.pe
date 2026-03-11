@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topbar - Design System</title>
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="topbar.css">
+  <link rel="stylesheet" href="button.css">
+  <link rel="stylesheet" href="iconButton.css">
+  <style>
+    .theme-toggle-wrapper {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-toggle {
+      width: 24px;
+      height: 16px;
+      background-color: var(--stroke-border-strong);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 2px;
+    }
+
+    .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    [data-theme="dark"] .icon-toggle.active {
+      background-color: var(--button-accent);
+    }
+
+    .icon-toggle-slider {
+      width: 12px;
+      height: 12px;
+      background-color: var(--content-on-accent);
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+    }
+
+    .icon-toggle.active .icon-toggle-slider {
+      transform: translateY(-50%) translateX(8px);
+    }
+
+    /* Topbar variations */
+    .topbar-divider {
+      width: 1px;
+      height: 14px;
+      background-color: var(--stroke-primary);
+      display: none;
+    }
+
+    /* Divider só aparece quando Share está visível E Help está visível */
+    .show-share.show-help .topbar-divider {
+      display: block;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Por padrão, Help aparece como botão normal */
+    .help-button-normal {
+      display: inline-flex;
+    }
+
+    .help-button-icon-only {
+      display: none;
+    }
+
+    /* Quando Help NÃO está visível, esconde ambos */
+    .topbar:not(.show-help) .help-button-normal,
+    .topbar:not(.show-help) .help-button-icon-only {
+      display: none;
+    }
+
+    /* Quando Help está visível E Options está ativo, mostra icon button */
+    .topbar.show-help.show-options .help-button-normal {
+      display: none;
+    }
+
+    .topbar.show-help.show-options .help-button-icon-only {
+      display: inline-flex;
+    }
+
+    /* Quando Help está visível MAS Options NÃO está ativo, mostra botão normal */
+    .topbar.show-help:not(.show-options) .help-button-normal {
+      display: inline-flex;
+    }
+
+    .topbar.show-help:not(.show-options) .help-button-icon-only {
+      display: none;
+    }
+
+    .ask-attio-button {
+      display: inline-flex;
+    }
+
+    .hide-ask-attio .ask-attio-button {
+      display: none;
+    }
+
+    .options-button-group {
+      display: none;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .show-options .options-button-group {
+      display: flex;
+    }
+
+    .share-button-wrapper {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .show-share .share-button-wrapper {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: var(--content-primary);
+    }
+
+    .subtitle {
+      color: var(--content-secondary);
+      margin-bottom: 40px;
+    }
+
+    .topbar-demo {
+      position: relative;
+      border: none;
+      border-radius: 0;
+      overflow: hidden;
+      background-color: var(--surface-primary);
+    }
+
+    .topbar-demo .topbar {
+      position: relative;
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle-wrapper">
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Dark Mode</span>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Options</span>
+      <button class="icon-toggle active" id="optionsToggle" onclick="toggleOptions()">
+        <div class="icon-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Share</span>
+      <button class="icon-toggle active" id="shareToggle" onclick="toggleShare()">
+        <div class="icon-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Help</span>
+      <button class="icon-toggle active" id="helpToggle" onclick="toggleHelp()">
+        <div class="icon-toggle-slider"></div>
+      </button>
+    </div>
+    <div class="toggle-group">
+      <span class="theme-toggle-label text-caption">Ask Attio</span>
+      <button class="icon-toggle active" id="askAttioToggle" onclick="toggleAskAttio()">
+        <div class="icon-toggle-slider"></div>
+      </button>
+    </div>
+  </div>
+
+  <a href="../index.html" class="back-button text-caption">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.72424 3.08191C5.9182 2.95382 6.18228 2.97579 6.35315 3.14636C6.52401 3.31723 6.54577 3.58119 6.4176 3.77527L6.35315 3.85339L3.70667 6.49988H11.4996C11.7757 6.49988 11.9995 6.72381 11.9996 6.99988C11.9996 7.27602 11.7758 7.49988 11.4996 7.49988H3.70667L6.35315 10.1464C6.54841 10.3416 6.54841 10.6581 6.35315 10.8534C6.15788 11.0485 5.84133 11.0486 5.64612 10.8534L2.14612 7.35339L2.08167 7.27527C1.95378 7.08128 1.97549 6.81713 2.14612 6.64636L5.64612 3.14636L5.72424 3.08191Z" fill="currentColor"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="container">
+    <h1 class="page-title text-title">Topbar</h1>
+
+    <div class="components-section">
+      <div class="component-group">
+        <div class="component-label text-caption">Preview</div>
+        <div class="topbar-demo">
+          <div class="topbar show-help">
+            <div class="topbar-left">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_19835_3028)">
+                  <path d="M7 0.5C10.5899 0.5 13.5 3.41015 13.5 7C13.5 10.5899 10.5899 13.5 7 13.5C3.41015 13.5 0.5 10.5899 0.5 7C0.5 3.41015 3.41015 0.5 7 0.5ZM7 1.5C3.96243 1.5 1.5 3.96243 1.5 7C1.5 10.0376 3.96243 12.5 7 12.5C10.0376 12.5 12.5 10.0376 12.5 7C12.5 3.96243 10.0376 1.5 7 1.5ZM7 9C7.3727 9.00003 7.6747 9.30212 7.6748 9.6748C7.6748 10.0476 7.37277 10.3496 7 10.3496C6.62721 10.3496 6.3252 10.0476 6.3252 9.6748C6.3253 9.3021 6.62727 9 7 9ZM5.12988 4.7998C5.48605 3.58942 6.77234 3.21652 7.76562 3.57812C9.26098 4.12307 9.44688 6.13294 8.05469 6.92188C7.89276 7.01359 7.79375 7.06574 7.69629 7.12402C7.606 7.17803 7.56696 7.20876 7.54785 7.22852C7.54401 7.2319 7.50102 7.25486 7.50098 7.5C7.50078 7.77565 7.27655 7.99947 7.00098 8C6.72496 8 6.50117 7.77597 6.50098 7.5C6.50102 7.12297 6.57206 6.79911 6.8291 6.5332C6.93995 6.41859 7.06776 6.33433 7.18262 6.26562C7.29033 6.2012 7.43621 6.12273 7.56152 6.05176C8.20014 5.68984 8.12963 4.77513 7.42383 4.51758C6.82994 4.30134 6.24218 4.56102 6.08887 5.08203L5.60938 4.94043L5.12988 4.7998ZM6.08887 5.08203C6.01074 5.34642 5.73234 5.49745 5.46777 5.41992C5.20335 5.34182 5.05233 5.06439 5.12988 4.7998L6.08887 5.08203Z" fill="currentColor"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_19835_3028">
+                    <rect width="14" height="14" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+              <span class="topbar-text">Help</span>
+            </div>
+            <div class="topbar-right">
+              <div class="share-button-wrapper">
+                <button class="btn btn-ghost btn-size-28">
+                  <span class="btn-text">Share</span>
+                </button>
+                <div class="topbar-divider"></div>
+              </div>
+              <div class="options-button-group">
+                <button class="icon-btn icon-btn-ghost icon-btn-size-28 help-button-icon-only">
+                  <span class="icon-btn-icon">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_help_icon)">
+                        <path d="M7 0.5C10.5899 0.5 13.5 3.41015 13.5 7C13.5 10.5899 10.5899 13.5 7 13.5C3.41015 13.5 0.5 10.5899 0.5 7C0.5 3.41015 3.41015 0.5 7 0.5ZM7 1.5C3.96243 1.5 1.5 3.96243 1.5 7C1.5 10.0376 3.96243 12.5 7 12.5C10.0376 12.5 12.5 10.0376 12.5 7C12.5 3.96243 10.0376 1.5 7 1.5ZM7 9C7.3727 9.00003 7.6747 9.30212 7.6748 9.6748C7.6748 10.0476 7.37277 10.3496 7 10.3496C6.62721 10.3496 6.3252 10.0476 6.3252 9.6748C6.3253 9.3021 6.62727 9 7 9ZM5.12988 4.7998C5.48605 3.58942 6.77234 3.21652 7.76562 3.57812C9.26098 4.12307 9.44688 6.13294 8.05469 6.92188C7.89276 7.01359 7.79375 7.06574 7.69629 7.12402C7.606 7.17803 7.56696 7.20876 7.54785 7.22852C7.54401 7.2319 7.50102 7.25486 7.50098 7.5C7.50078 7.77565 7.27655 7.99947 7.00098 8C6.72496 8 6.50117 7.77597 6.50098 7.5C6.50102 7.12297 6.57206 6.79911 6.8291 6.5332C6.93995 6.41859 7.06776 6.33433 7.18262 6.26562C7.29033 6.2012 7.43621 6.12273 7.56152 6.05176C8.20014 5.68984 8.12963 4.77513 7.42383 4.51758C6.82994 4.30134 6.24218 4.56102 6.08887 5.08203L5.60938 4.94043L5.12988 4.7998ZM6.08887 5.08203C6.01074 5.34642 5.73234 5.49745 5.46777 5.41992C5.20335 5.34182 5.05233 5.06439 5.12988 4.7998L6.08887 5.08203Z" fill="currentColor"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_help_icon">
+                          <rect width="14" height="14" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </span>
+                </button>
+                <button class="icon-btn icon-btn-ghost icon-btn-size-28">
+                  <span class="icon-btn-icon">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C8 3.55228 7.55228 4 7 4C6.44772 4 6 3.55228 6 3C6 2.44772 6.44772 2 7 2C7.55228 2 8 2.44772 8 3ZM8 7C8 7.55228 7.55228 8 7 8C6.44772 8 6 7.55228 6 7C6 6.44772 6.44772 6 7 6C7.55228 6 8 6.44772 8 7ZM7 12C7.55228 12 8 11.5523 8 11C8 10.4477 7.55228 10 7 10C6.44772 10 6 10.4477 6 11C6 11.5523 6.44772 12 7 12Z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <button class="btn btn-ghost btn-size-28 help-button-normal">
+                <span class="btn-icon">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_19835_3028)">
+                      <path d="M7 0.5C10.5899 0.5 13.5 3.41015 13.5 7C13.5 10.5899 10.5899 13.5 7 13.5C3.41015 13.5 0.5 10.5899 0.5 7C0.5 3.41015 3.41015 0.5 7 0.5ZM7 1.5C3.96243 1.5 1.5 3.96243 1.5 7C1.5 10.0376 3.96243 12.5 7 12.5C10.0376 12.5 12.5 10.0376 12.5 7C12.5 3.96243 10.0376 1.5 7 1.5ZM7 9C7.3727 9.00003 7.6747 9.30212 7.6748 9.6748C7.6748 10.0476 7.37277 10.3496 7 10.3496C6.62721 10.3496 6.3252 10.0476 6.3252 9.6748C6.3253 9.3021 6.62727 9 7 9ZM5.12988 4.7998C5.48605 3.58942 6.77234 3.21652 7.76562 3.57812C9.26098 4.12307 9.44688 6.13294 8.05469 6.92188C7.89276 7.01359 7.79375 7.06574 7.69629 7.12402C7.606 7.17803 7.56696 7.20876 7.54785 7.22852C7.54401 7.2319 7.50102 7.25486 7.50098 7.5C7.50078 7.77565 7.27655 7.99947 7.00098 8C6.72496 8 6.50117 7.77597 6.50098 7.5C6.50102 7.12297 6.57206 6.79911 6.8291 6.5332C6.93995 6.41859 7.06776 6.33433 7.18262 6.26562C7.29033 6.2012 7.43621 6.12273 7.56152 6.05176C8.20014 5.68984 8.12963 4.77513 7.42383 4.51758C6.82994 4.30134 6.24218 4.56102 6.08887 5.08203L5.60938 4.94043L5.12988 4.7998ZM6.08887 5.08203C6.01074 5.34642 5.73234 5.49745 5.46777 5.41992C5.20335 5.34182 5.05233 5.06439 5.12988 4.7998L6.08887 5.08203Z" fill="currentColor"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_19835_3028">
+                        <rect width="14" height="14" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="btn-text help-button-text">Help</span>
+              </button>
+              <button class="btn btn-secondary btn-size-28 ask-attio-button">
+                <span class="btn-icon">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_19835_2135)">
+                      <path d="M6.99976 0.499756C7.22492 0.499756 7.3979 0.616126 7.49585 0.697021C7.60593 0.788001 7.70584 0.905555 7.79565 1.02905C7.97699 1.27846 8.16282 1.61997 8.33667 2.02319C8.65158 2.75375 8.95046 3.73808 9.12964 4.8689C10.2609 5.04804 11.2455 5.34785 11.9763 5.66284C12.3794 5.8366 12.721 6.02163 12.9705 6.20288C13.094 6.2927 13.2115 6.39356 13.3025 6.50366C13.3834 6.60155 13.4997 6.77455 13.4998 6.99976C13.4997 7.22506 13.3834 7.39795 13.3025 7.49585C13.2114 7.60601 13.094 7.70579 12.9705 7.79565C12.721 7.97702 12.3796 8.16182 11.9763 8.33569C11.2455 8.65075 10.2611 8.95046 9.12964 9.12964C8.95048 10.2609 8.65167 11.2455 8.33667 11.9763C8.16279 12.3796 7.97702 12.721 7.79565 12.9705C7.7058 13.094 7.606 13.2115 7.49585 13.3025C7.39793 13.3834 7.22507 13.4998 6.99976 13.4998C6.77453 13.4997 6.60154 13.3834 6.50366 13.3025C6.3936 13.2115 6.29366 13.094 6.20386 12.9705C6.02254 12.721 5.83668 12.3795 5.66284 11.9763C5.34785 11.2455 5.04803 10.2609 4.8689 9.12964C3.73791 8.95043 2.75378 8.65065 2.02319 8.33569C1.61996 8.16184 1.27847 7.97699 1.02905 7.79565C0.905544 7.70583 0.788007 7.60594 0.697021 7.49585C0.626251 7.41017 0.528073 7.26695 0.504639 7.08179L0.499756 6.99976L0.504639 6.91772C0.528096 6.73248 0.626248 6.58932 0.697021 6.50366C0.788075 6.3935 0.905447 6.29275 1.02905 6.20288C1.27847 6.0216 1.62006 5.83664 2.02319 5.66284C2.75379 5.34791 3.73799 5.04808 4.8689 4.8689C5.0481 3.73781 5.34884 2.75383 5.66382 2.02319C5.83769 1.61991 6.0225 1.27849 6.20386 1.02905C6.2937 0.905494 6.39353 0.788044 6.50366 0.697021C6.60154 0.616142 6.77453 0.499823 6.99976 0.499756ZM6.99976 1.6355C6.879 1.80579 6.73274 2.06859 6.58179 2.4187C6.27064 3.14042 5.96302 4.17312 5.8064 5.37476C5.77709 5.59965 5.59965 5.77709 5.37476 5.8064C4.17314 5.96302 3.14041 6.27065 2.4187 6.58179C2.06858 6.73275 1.80578 6.879 1.6355 6.99976C1.80577 7.12049 2.06867 7.2668 2.4187 7.41772C3.14041 7.72887 4.17315 8.03649 5.37476 8.19312C5.59958 8.22241 5.77701 8.39997 5.8064 8.62476C5.96299 9.82631 6.27067 10.8591 6.58179 11.5808C6.7325 11.9304 6.87911 12.1927 6.99976 12.363C7.12043 12.1927 7.26696 11.9305 7.41772 11.5808C7.72887 10.8591 8.03651 9.82639 8.19312 8.62476L8.21069 8.54272C8.26724 8.35779 8.42802 8.21882 8.62476 8.19312C9.8264 8.03651 10.8591 7.72887 11.5808 7.41772C11.9305 7.26696 12.1927 7.12043 12.363 6.99976C12.1927 6.87911 11.9304 6.7325 11.5808 6.58179C10.8591 6.27067 9.82632 5.96299 8.62476 5.8064C8.39997 5.77701 8.22241 5.59958 8.19312 5.37476C8.03649 4.17315 7.72887 3.14041 7.41772 2.4187C7.26679 2.06866 7.1205 1.80576 6.99976 1.6355ZM1.99976 0.449951C2.27361 0.449951 2.43161 0.632294 2.46948 0.67749C2.52745 0.746721 2.5673 0.820177 2.59155 0.869873C2.64258 0.974548 2.68431 1.0962 2.7146 1.19312C2.72202 1.21685 2.72733 1.24124 2.73413 1.2644C2.75766 1.27132 2.78226 1.27738 2.8064 1.28491C2.90328 1.31519 3.02493 1.35694 3.12964 1.40796C3.17929 1.43218 3.25274 1.47207 3.32202 1.53003C3.36685 1.56757 3.54947 1.7256 3.54956 1.99976C3.54956 2.27403 3.36686 2.43193 3.32202 2.46948C3.25269 2.52753 3.17933 2.56731 3.12964 2.59155C3.0249 2.6426 2.90332 2.68431 2.8064 2.7146C2.78231 2.72212 2.75761 2.72723 2.73413 2.73413C2.72723 2.75761 2.72212 2.78231 2.7146 2.8064C2.68431 2.90332 2.6426 3.0249 2.59155 3.12964C2.56731 3.17933 2.52753 3.25269 2.46948 3.32202C2.43193 3.36686 2.27403 3.54956 1.99976 3.54956C1.7256 3.54947 1.56757 3.36685 1.53003 3.32202C1.47207 3.25274 1.43218 3.17929 1.40796 3.12964C1.35694 3.02493 1.31519 2.90328 1.28491 2.8064C1.27738 2.78226 1.27132 2.75766 1.2644 2.73413C1.24124 2.72733 1.21685 2.72202 1.19312 2.7146C1.0962 2.68431 0.974548 2.64258 0.869873 2.59155C0.820177 2.5673 0.746721 2.52745 0.67749 2.46948C0.632294 2.43161 0.449951 2.27361 0.449951 1.99976C0.450038 1.72564 0.632632 1.5676 0.67749 1.53003C0.746792 1.472 0.820174 1.43221 0.869873 1.40796C0.974588 1.35691 1.09618 1.31521 1.19312 1.28491C1.21698 1.27746 1.24113 1.27125 1.2644 1.2644C1.27125 1.24113 1.27746 1.21698 1.28491 1.19312C1.31521 1.09618 1.35691 0.974588 1.40796 0.869873C1.43221 0.820174 1.472 0.746792 1.53003 0.67749C1.5676 0.632632 1.72564 0.450038 1.99976 0.449951Z" fill="currentColor"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_19835_2135">
+                        <rect width="14" height="14" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="btn-text">Ask Attio</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+  <script>
+    function toggleOptions() {
+      const toggle = document.getElementById('optionsToggle');
+      const topbar = document.querySelector('.topbar');
+      toggle.classList.toggle('active');
+      topbar.classList.toggle('show-options');
+      localStorage.setItem('optionsVisible', toggle.classList.contains('active'));
+    }
+
+    function toggleShare() {
+      const toggle = document.getElementById('shareToggle');
+      const topbar = document.querySelector('.topbar');
+      toggle.classList.toggle('active');
+      topbar.classList.toggle('show-share');
+      localStorage.setItem('shareVisible', toggle.classList.contains('active'));
+    }
+
+    function toggleHelp() {
+      const toggle = document.getElementById('helpToggle');
+      const topbar = document.querySelector('.topbar');
+      toggle.classList.toggle('active');
+      topbar.classList.toggle('show-help');
+      localStorage.setItem('helpVisible', toggle.classList.contains('active'));
+    }
+
+    function toggleAskAttio() {
+      const toggle = document.getElementById('askAttioToggle');
+      const topbar = document.querySelector('.topbar');
+      toggle.classList.toggle('active');
+      topbar.classList.toggle('hide-ask-attio');
+      localStorage.setItem('askAttioVisible', toggle.classList.contains('active'));
+    }
+
+    // Load saved visibility states
+    const optionsVisible = localStorage.getItem('optionsVisible') !== 'false';
+    const shareVisible = localStorage.getItem('shareVisible') !== 'false';
+    const helpVisible = localStorage.getItem('helpVisible') !== 'false';
+    const askAttioVisible = localStorage.getItem('askAttioVisible') !== 'false';
+    
+    const topbar = document.querySelector('.topbar');
+    
+    // Por padrão, Help está visível (se não foi desativado explicitamente)
+    if (helpVisible !== false) {
+      document.getElementById('helpToggle').classList.add('active');
+      topbar.classList.add('show-help');
+    }
+    
+    if (optionsVisible) {
+      document.getElementById('optionsToggle').classList.add('active');
+      topbar.classList.add('show-options');
+    }
+    
+    if (shareVisible) {
+      document.getElementById('shareToggle').classList.add('active');
+      topbar.classList.add('show-share');
+    }
+
+    // Por padrão, Ask Attio está visível (se não foi desativado explicitamente)
+    if (askAttioVisible === false) {
+      document.getElementById('askAttioToggle').classList.remove('active');
+      topbar.classList.add('hide-ask-attio');
+    } else {
+      document.getElementById('askAttioToggle').classList.add('active');
+    }
+  </script>
+</body>
+</html>

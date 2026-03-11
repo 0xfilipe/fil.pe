@@ -1,0 +1,149 @@
+@import '../tokens/colors.css';
+@import '../tokens/typography.css';
+@import '../tokens/shadows.css';
+
+/* Tooltip base */
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  max-width: 240px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  background-color: var(--surface-popover);
+  box-shadow: var(--shadow-e2);
+  border: 1px solid var(--stroke-border-ghost);
+  pointer-events: none;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+}
+
+.tooltip.is-visible,
+.tooltip.tooltip-preview {
+  display: inline-flex;
+  opacity: 1;
+  bottom: auto;
+  left: auto;
+  transition: none;
+  white-space: nowrap;
+}
+
+.tooltip.tooltip-preview {
+  position: relative;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Avatar slot */
+.tooltip-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text wrapper */
+.tooltip-text-wrapper {
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+}
+
+/* Text */
+.tooltip-text {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-primary);
+  white-space: nowrap;
+}
+
+/* =============================================
+   Subline variant
+   ============================================= */
+.tooltip--subline {
+  padding: 0 10px;
+}
+
+.tooltip--subline.is-visible,
+.tooltip--subline.tooltip-preview {
+  height: 44px;
+  gap: 6px;
+}
+
+.tooltip--subline .tooltip-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 2px;
+  gap: 0;
+}
+
+.tooltip--subline .tooltip-text {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-primary);
+}
+
+.tooltip-subline {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-quaternary);
+  white-space: nowrap;
+}
+
+/* =============================================
+   Positions
+   ============================================= */
+
+/* Top (default) */
+.tooltip--top {
+  transform: translateX(-50%);
+}
+
+/* Bottom */
+.tooltip--bottom {
+  transform: translateX(-50%);
+}
+
+/* Left */
+.tooltip--left {
+  transform: translateY(-50%);
+}
+
+/* Right */
+.tooltip--right {
+  transform: translateY(-50%);
+}
+
+/* =============================================
+   Shortcut key styling
+   ============================================= */
+.tooltip-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  color: var(--content-quaternary);
+}
+
+.tooltip-shortcut kbd {
+  font-family: var(--font-family);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: var(--font-weight-medium);
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}

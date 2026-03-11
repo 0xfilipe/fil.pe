@@ -1,0 +1,89 @@
+/* =============================================
+   INDEX PAGE STYLES
+   Page-specific styles for the main navigation
+   ============================================= */
+
+/* Topbar (if used on index) */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--surface-primary);
+  border-bottom: 1px solid var(--stroke-primary);
+  z-index: 50;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 16px;
+}
+
+.topbar-left svg {
+  width: 14px;
+  height: 14px;
+  color: var(--content-primary);
+  flex-shrink: 0;
+}
+
+.topbar-left svg path {
+  fill: currentColor;
+}
+
+.topbar-text {
+  color: var(--content-primary);
+}
+
+.topbar-right {
+  padding-right: 12px;
+}
+
+/* Index page container override */
+.container {
+  padding: 120px 20px 80px 20px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 48px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  color: var(--content-tertiary);
+  margin-bottom: 16px;
+  transition: color 0.2s ease;
+}
+
+/* Navigation Links */
+.links-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* Use with .text-body class in HTML for font styles */
+.link-item {
+  text-decoration: none;
+  color: var(--content-primary);
+  display: inline-block;
+  padding: 6px 8px;
+  margin-left: -8px;
+  border-radius: 6px;
+  transition: text-indent 0.2s ease, background-color 0.2s ease;
+  text-indent: 0;
+}
+
+.link-item:hover {
+  text-indent: 4px;
+}

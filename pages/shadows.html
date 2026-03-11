@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadows - Design System</title>
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/shadows.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <style>
+    /* Page-specific shadow styles */
+    
+    /* Light Mode Shadows */
+    :root .shadow-demo-e1,
+    [data-theme="light"] .shadow-demo-e1 {
+      box-shadow: 0 0 2px 0 rgba(28,40,64,0.18), 0 1px 3px 0 rgba(0,0,0,0.04);
+    }
+
+    :root .shadow-demo-e2,
+    [data-theme="light"] .shadow-demo-e2 {
+      box-shadow: 0 0 0 1px rgba(28,40,64,0.04), 0 4px 8px -4px rgba(28,40,64,0.12), 0 4px 12px -2px rgba(24,41,75,0.16);
+    }
+
+    :root .shadow-demo-e3,
+    [data-theme="light"] .shadow-demo-e3 {
+      box-shadow: 0 0 1px 0 rgba(28,40,64,0.16), 0 8px 28px -6px rgba(28,40,64,0.12), 0 18px 88px -4px rgba(28,40,64,0.16);
+    }
+
+    :root .shadow-demo-eBlue,
+    [data-theme="light"] .shadow-demo-eBlue {
+      background: #266DF0;
+      color: #FFFFFF;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(15,107,233,0.12), 0 3px 6px -2px rgba(15,107,233,0.08);
+    }
+
+    :root .shadow-demo-eRed,
+    [data-theme="light"] .shadow-demo-eRed {
+      background: #FF5454;
+      color: #FFFFFF;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(255,91,89,0.12), 0 3px 6px -2px rgba(255,91,89,0.08);
+    }
+
+    :root .shadow-demo-input,
+    [data-theme="light"] .shadow-demo-input {
+      box-shadow: var(--shadow-home-input-active);
+    }
+
+    /* Dark Mode Shadows */
+    [data-theme="dark"] .shadow-demo {
+      background: #212327;
+      border: 1px solid #313337;
+    }
+
+    [data-theme="dark"] .shadow-demo-e1 {
+      box-shadow: 0 0 2px 0 rgba(0,0,0,0.04), 0 1px 3px 0 rgba(0,0,0,0.12);
+    }
+
+    [data-theme="dark"] .shadow-demo-e2 {
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.16), 0 4px 8px -4px rgba(0,0,0,0.24), 0 4px 12px -2px rgba(0,0,0,0.32);
+    }
+
+    [data-theme="dark"] .shadow-demo-e3 {
+      box-shadow: 0 0 1px 0 rgba(0,0,0,0.64), 0 8px 28px -6px rgba(0,0,0,0.48), 0 18px 88px -4px rgba(0,0,0,0.64);
+    }
+
+    [data-theme="dark"] .shadow-demo-eBlue {
+      background: #266DF0;
+      color: #FFFFFF;
+      border: none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10), 0 2px 4px -2px rgba(15,107,233,0.12), 0 3px 6px -2px rgba(15,107,233,0.08);
+    }
+
+    [data-theme="dark"] .shadow-demo-eRed {
+      background: #ED3B3B;
+      color: #FFFFFF;
+      border: none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10), 0 2px 4px -2px rgba(255,91,89,0.12), 0 3px 6px -2px rgba(255,91,89,0.08);
+    }
+
+    [data-theme="dark"] .shadow-demo-input {
+      box-shadow: var(--shadow-home-input-active);
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle-wrapper">
+    <span class="theme-toggle-label text-caption">Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <div class="theme-toggle-slider"></div>
+    </button>
+  </div>
+
+  <a href="../index.html" class="back-button text-caption">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.72424 3.08191C5.9182 2.95382 6.18228 2.97579 6.35315 3.14636C6.52401 3.31723 6.54577 3.58119 6.4176 3.77527L6.35315 3.85339L3.70667 6.49988H11.4996C11.7757 6.49988 11.9995 6.72381 11.9996 6.99988C11.9996 7.27602 11.7758 7.49988 11.4996 7.49988H3.70667L6.35315 10.1464C6.54841 10.3416 6.54841 10.6581 6.35315 10.8534C6.15788 11.0485 5.84133 11.0486 5.64612 10.8534L2.14612 7.35339L2.08167 7.27527C1.95378 7.08128 1.97549 6.81713 2.14612 6.64636L5.64612 3.14636L5.72424 3.08191Z" fill="currentColor"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="container">
+    <h1 class="page-title text-title">Shadows</h1>
+
+    <div class="components-section">
+      <div class="component-group">
+        <div class="component-label text-caption">e1 — Subtle</div>
+        <div class="shadow-demo shadow-demo-e1"></div>
+      </div>
+
+      <div class="component-group">
+        <div class="component-label text-caption">e2 — Medium</div>
+        <div class="shadow-demo shadow-demo-e2"></div>
+      </div>
+
+      <div class="component-group">
+        <div class="component-label text-caption">e3 — High</div>
+        <div class="shadow-demo shadow-demo-e3"></div>
+      </div>
+
+      <div class="component-group">
+        <div class="component-label text-caption">eBlue — Primary CTA</div>
+        <div class="shadow-demo shadow-demo-eBlue"></div>
+      </div>
+
+      <div class="component-group">
+        <div class="component-label text-caption">eRed — Critical CTA</div>
+        <div class="shadow-demo shadow-demo-eRed"></div>
+      </div>
+
+      <div class="component-group">
+        <div class="component-label text-caption">Home Input Active</div>
+        <div class="shadow-demo shadow-demo-input"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
