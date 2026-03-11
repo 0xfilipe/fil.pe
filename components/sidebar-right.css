@@ -190,12 +190,9 @@
 
 .sidebar-right-section-content {
   display: flex;
-  padding: 0 12px 10px 16px;
+  padding: 0 12px 8px 16px;
   flex-direction: column;
-}
-
-.sidebar-right-section-content > .detail-row + .detail-row {
-  margin-top: 4px;
+  gap: 2px;
 }
 
 /* See more footer */
