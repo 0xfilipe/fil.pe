@@ -1,0 +1,98 @@
+(() => {
+  const STORAGE_KEY = "fil.pe-theme";
+  const FORCED_DARK = "forced-dark";
+  const main = document.querySelector("main");
+  const resetMs = 900;
+
+  function isBackdropTarget(t) {
+    return (
+      t === document.body ||
+      t === document.documentElement ||
+      t === main
+    );
+  }
+
+  function clearSelection() {
+    const s = window.getSelection();
+    if (s && s.rangeCount) s.removeAllRanges();
+  }
+
+  document.addEventListener(
+    "selectstart",
+    (e) => {
+      if (isBackdropTarget(e.target)) e.preventDefault();
+    },
+    true
+  );
+
+  document.addEventListener(
+    "mousedown",
+    (e) => {
+      if (isBackdropTarget(e.target)) e.preventDefault();
+    },
+    true
+  );
+
+  function readStored() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function setForcedDark(on) {
+    if (on) {
+      document.documentElement.dataset.theme = "dark";
+      try {
+        localStorage.setItem(STORAGE_KEY, FORCED_DARK);
+      } catch (_) {}
+    } else {
+      delete document.documentElement.dataset.theme;
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (_) {}
+    }
+  }
+
+  function init() {
+    try {
+      const v = readStored();
+      if (v === "light") {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+      if (v === "dark" || v === FORCED_DARK) {
+        document.documentElement.dataset.theme = "dark";
+        if (v === "dark") {
+          localStorage.setItem(STORAGE_KEY, FORCED_DARK);
+        }
+      }
+    } catch (_) {}
+  }
+
+  init();
+
+  let count = 0;
+  let lastAt = 0;
+
+  document.addEventListener("click", (e) => {
+    if (!isBackdropTarget(e.target)) return;
+
+    requestAnimationFrame(clearSelection);
+
+    const now = Date.now();
+    if (now - lastAt > resetMs) count = 0;
+    lastAt = now;
+    count += 1;
+
+    if (count >= 2) {
+      count = 0;
+      if (document.documentElement.dataset.theme === "dark") {
+        setForcedDark(false);
+      } else {
+        setForcedDark(true);
+      }
+    }
+  });
+})();

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Content — Filipe Almeida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="work-detail-nav" aria-label="Breadcrumb">
+        <a class="back-icon-button" href="../index.html" aria-label="Back to home">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5.36133 2.35449C5.57959 2.1055 5.95876 2.08074 6.20801 2.29883C6.457 2.51709 6.48176 2.89626 6.26367 3.14551L4.07129 5.65039H9.75C12.0144 5.65039 13.8496 7.48563 13.8496 9.75V13.25C13.8496 13.5814 13.5814 13.8496 13.25 13.8496C12.9186 13.8496 12.6504 13.5814 12.6504 13.25V9.75C12.6504 8.14837 11.3516 6.84961 9.75 6.84961H4.07129L6.26367 9.35449C6.48176 9.60374 6.457 9.98291 6.20801 10.2012C5.95876 10.4193 5.57959 10.3945 5.36133 10.1455L2.29883 6.64551L1.95312 6.25L2.29883 5.85449L5.36133 2.35449Z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+      </nav>
+      <header class="intro">
+        <h1>Content</h1>
+        <p class="role"><time datetime="2025">2025</time></p>
+      </header>
+      <div class="description">
+        <p>
+          Case study and visuals for this project will go here. Replace this
+          text with context, your role, and outcomes.
+        </p>
+        <p>
+          <a
+            class="chip-link"
+            href="https://www.figma.com/community/plugin/1535420515692175200/contently"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Figma Community — Content</a>
+        </p>
+      </div>
+      <figure class="work-detail-header-image">
+        <img
+          src="images/hero.png"
+          alt="Oil painting of a garden path through vaulted arches"
+          width="1024"
+          height="764"
+          decoding="async"
+        />
+      </figure>
+      <div class="work-detail-sections">
+        <section class="work-detail-section" aria-labelledby="work-section-1">
+          <h2 id="work-section-1" class="work-detail-section-title">Context</h2>
+          <div class="work-detail-section-description">
+            <p>
+              Replace with background on the problem, constraints, and what
+              success looked like for this project.
+            </p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section class="work-detail-section" aria-labelledby="work-section-2">
+          <h2 id="work-section-2" class="work-detail-section-title">Process</h2>
+          <div class="work-detail-section-description">
+            <p>
+              Replace with how you explored solutions, collaborated, and made
+              decisions — sketches, systems, or key iterations.
+            </p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section class="work-detail-section" aria-labelledby="work-section-3">
+          <h2 id="work-section-3" class="work-detail-section-title">Outcome</h2>
+          <div class="work-detail-section-description">
+            <p>
+              Replace with shipped results, learnings, and how the work moved
+              the product or team forward.
+            </p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section
+          class="work-detail-section work-detail-section--text-only"
+          aria-label="Closing notes"
+        >
+          <div class="work-detail-section-description">
+            <p>
+              Closing notes, learnings, or credits — this block has no image.
+              Replace with project-specific copy.
+            </p>
+          </div>
+        </section>
+      </div>
+      <section class="work" aria-label="Weather and time in Porto">
+        <button
+          type="button"
+          class="porto-live-trigger"
+          id="porto-live-trigger"
+          aria-label="Weather and time in Porto"
+        >
+          <span id="porto-line">Loading…</span>
+        </button>
+      </section>
+    </main>
+    <script src="../theme.js" defer></script>
+    <script src="../interaction.js" defer></script>
+    <script src="../weather.js" defer></script>
+  </body>
+</html>
