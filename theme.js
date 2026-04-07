@@ -28,7 +28,16 @@
   document.addEventListener(
     "mousedown",
     (e) => {
-      if (isBackdropTarget(e.target)) e.preventDefault();
+      const t = e.target;
+      if (
+        t &&
+        t.nodeType === 1 &&
+        typeof t.closest === "function" &&
+        t.closest("button, a[href], input, textarea, select")
+      ) {
+        return;
+      }
+      if (isBackdropTarget(t)) e.preventDefault();
     },
     true
   );

@@ -1,0 +1,9 @@
+Weather easter-egg clips from Mixkit (https://mixkit.co) — Mixkit License, free for commercial and personal use.
+
+MP3 (preview downloads renamed for the site):
+- wx-rain.mp3 — rain ambience (sfx id 2393)
+- wx-thunder.mp3 — distant thunder rumble (sfx id 1278)
+- wx-wind.mp3 — “Breeze through the trees”, vento leve contínuo (sfx id 2427)
+- wx-day.mp3 — “Little birds singing in the trees” (sfx id 17)
+
+Neve: sem som (só efeito visual).
