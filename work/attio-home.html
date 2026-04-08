@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Attio Home — Filipe Almeida</title>
+    <link rel="icon" href="../favicon.png" type="image/png" sizes="1024x1024" />
+    <link rel="apple-touch-icon" href="../favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://api.open-meteo.com" />
@@ -40,8 +42,17 @@
       </header>
       <div class="description">
         <p>
-          Case study and visuals for this project will go here. Replace this
-          text with context, your role, and outcomes.
+          A redesign of the daily entry point inside Attio - turning CRM,
+          meetings, tasks, and AI into a single, continuous workflow. Less
+          dashboard, more cockpit.
+        </p>
+        <p>
+          Home had to answer three questions within seconds of opening it: what
+          can I ask, what's coming, what's open. Everything else was secondary.
+        </p>
+        <p>
+          The goal wasn't to show more. It was to show the right things in the
+          right order - a place you work from, not a place you visit first.
         </p>
       </div>
       <figure class="work-detail-header-image">
@@ -55,11 +66,46 @@
       </figure>
       <div class="work-detail-sections">
         <section class="work-detail-section" aria-labelledby="work-section-1">
-          <h2 id="work-section-1" class="work-detail-section-title">Context</h2>
+          <h2 id="work-section-1" class="work-detail-section-title">One vertical flow</h2>
           <div class="work-detail-section-description">
             <p>
-              Replace with background on the problem, constraints, and what
-              success looked like for this project.
+              No tabs. No nav. The page reads top to bottom the same way a day
+              does - composer, meetings, tasks.
+            </p>
+            <p>
+              Each section earns its position by urgency, not by category. The
+              closer to the top, the closer to action.
+            </p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section
+          class="work-detail-section"
+          aria-label="Composer at the top of Home"
+        >
+          <div class="work-detail-section-description">
+            <p>
+              The composer sits at the top because it's the fastest path to
+              anything in the product - ask a question, draft a follow-up, run
+              a prompt, trigger a workflow.
+            </p>
+            <p>
+              Putting it above the fold is a small decision that changes the
+              posture of the whole page. You don't arrive at Home to read. You
+              arrive to act.
             </p>
           </div>
           <figure class="work-detail-section-image">
@@ -78,11 +124,15 @@
           </figure>
         </section>
         <section class="work-detail-section" aria-labelledby="work-section-2">
-          <h2 id="work-section-2" class="work-detail-section-title">Process</h2>
+          <h2 id="work-section-2" class="work-detail-section-title">Home structure</h2>
           <div class="work-detail-section-description">
+            <p>The layout is built around hierarchy and rhythm.</p>
             <p>
-              Replace with how you explored solutions, collaborated, and made
-              decisions — sketches, systems, or key iterations.
+              Meetings, tasks, and context are structured to be scanned instantly
+              — with clear prioritisation and minimal noise.
+            </p>
+            <p>
+              Everything has a place, so nothing competes for attention.
             </p>
           </div>
           <figure class="work-detail-section-image">
@@ -101,11 +151,99 @@
           </figure>
         </section>
         <section class="work-detail-section" aria-labelledby="work-section-3">
-          <h2 id="work-section-3" class="work-detail-section-title">Outcome</h2>
+          <h2 id="work-section-3" class="work-detail-section-title">Meetings</h2>
           <div class="work-detail-section-description">
             <p>
-              Replace with shipped results, learnings, and how the work moved
-              the product or team forward.
+              Meetings are the most time-sensitive thing on anyone's day. They
+              start cold and end lossy - context missing on the way in,
+              follow-ups missing on the way out.
+            </p>
+            <p>
+              We designed each meeting as a card, not a row, because a card can
+              hold context. Prep is already there when you land. Expand to see
+              the brief, the attendees, the recent touchpoints. Collapse and the
+              page returns to rest.
+            </p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section class="work-detail-section" aria-labelledby="work-section-4">
+          <h2 id="work-section-4" class="work-detail-section-title">Prep meeting</h2>
+          <div class="work-detail-section-description">
+            <p>
+              Before each meeting, users can generate an instant briefing.
+            </p>
+            <p>
+              Relevant context is pulled together automatically: who's involved,
+              what's been discussed, and what matters now.
+            </p>
+            <p>No reconstruction. Just readiness.</p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section class="work-detail-section" aria-labelledby="work-section-5">
+          <h2 id="work-section-5" class="work-detail-section-title">After meeting</h2>
+          <div class="work-detail-section-description">
+            <p>After the call, the meeting evolves into a recap.</p>
+            <p>
+              Key outcomes, decisions, and next steps are captured automatically
+              — so context doesn't disappear.
+            </p>
+            <p>The system keeps the memory.</p>
+          </div>
+          <figure class="work-detail-section-image">
+            <img
+              class="work-detail-section-image__light"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+            <img
+              class="work-detail-section-image__dark"
+              src="images/hero.png"
+              alt=""
+              decoding="async"
+            />
+          </figure>
+        </section>
+        <section class="work-detail-section" aria-labelledby="work-section-6">
+          <h2 id="work-section-6" class="work-detail-section-title">Tasks</h2>
+          <div class="work-detail-section-description">
+            <p>
+              Tasks live below meetings, intentionally lightweight. No projects,
+              no priorities, no statuses. Just a list to move through.
+            </p>
+            <p>
+              We resisted every instinct to make this section more capable. The
+              moment tasks become a system to manage, they stop being a thing
+              you finish. The friction had to stay low enough that checking one
+              off feels like momentum, not admin.
             </p>
           </div>
           <figure class="work-detail-section-image">
@@ -125,12 +263,22 @@
         </section>
         <section
           class="work-detail-section work-detail-section--text-only"
-          aria-label="Closing notes"
+          aria-label="Designing for AI, workflow, and Ask Attio link"
         >
           <div class="work-detail-section-description">
             <p>
-              Closing notes, learnings, or credits — this block has no image.
-              Replace with project-specific copy.
+              Designing for AI, it's about reducing friction across the entire
+              workflow - so context persists, actions are clear, and the day moves
+              forward without effort.
+            </p>
+            <p>
+              Now live:
+              <a
+                class="chip-link chip-link--light"
+                href="https://attio.xyz/ask-attio"
+                target="_blank"
+                rel="noopener noreferrer"
+                >attio.xyz/ask-attio</a>
             </p>
           </div>
         </section>
