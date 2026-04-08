@@ -125,6 +125,12 @@ body::before {
   animation: noise-drift 22s linear infinite;
 }
 
+@supports (-webkit-touch-callout: none) {
+  body::before {
+    display: none;
+  }
+}
+
 main {
   max-width: 532px;
   margin: 0 auto;
