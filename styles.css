@@ -142,6 +142,37 @@ main:has(.work-detail-nav) {
   padding-bottom: 64px;
 }
 
+@keyframes home-enter-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 11px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+html.js-home-enter main.home-enter [data-home-enter] {
+  opacity: 0;
+  transform: translate3d(0, 11px, 0);
+}
+
+html.js-home-enter main.home-enter.home-enter--active [data-home-enter] {
+  animation: home-enter-reveal var(--home-enter-dur, 0.44s)
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--home-enter-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-home-enter main.home-enter [data-home-enter] {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 .intro {
   display: flex;
   flex-direction: column;

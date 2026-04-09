@@ -22,19 +22,22 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.documentElement.classList.add("js-home-enter");
+    </script>
   </head>
   <body>
-    <main>
+    <main class="home-enter">
       <header class="intro">
-        <h1>Filipe Almeida</h1>
-        <p class="role">Product designer at Attio.</p>
+        <h1 data-home-enter>Filipe Almeida</h1>
+        <p class="role" data-home-enter>Product designer at Attio.</p>
       </header>
       <div class="description">
-        <p>
+        <p data-home-enter>
           I was born and raised in Porto, Portugal, where I still live today with my
           partner and two kids.
         </p>
-        <p>
+        <p data-home-enter>
           I&rsquo;ve spent the last decade designing digital products at
           <a
             class="chip-link"
@@ -72,15 +75,15 @@
             >Attio</a
           >, where I currently work as a Senior Product Designer.
         </p>
-        <p>
+        <p data-home-enter>
           Making things is what I do. Lately that&rsquo;s spilled into building side
           projects on my own time, mostly for the fun of it.
         </p>
-        <p>
+        <p data-home-enter>
           Outside of work, I play and watch football and try to be a decent dad.
         </p>
       </div>
-      <nav class="social" aria-label="Social links">
+      <nav class="social" aria-label="Social links" data-home-enter>
         <a
           class="chip-link"
           href="https://x.com/hifilipe_"
@@ -101,7 +104,7 @@
           >LinkedIn</a>
         <a class="chip-link" href="mailto:hi@fil.pe">Mail</a>
       </nav>
-      <section class="work" aria-labelledby="recent-work-heading">
+      <section class="work" aria-labelledby="recent-work-heading" data-home-enter>
         <h2 id="recent-work-heading">Work</h2>
         <ul class="work-list">
           <li class="work-item work-item--row-link">
@@ -118,7 +121,7 @@
           </li>
         </ul>
       </section>
-      <section class="work" aria-labelledby="projects-heading">
+      <section class="work" aria-labelledby="projects-heading" data-home-enter>
         <h2 id="projects-heading">Personal projects</h2>
         <ul class="work-list">
           <li class="work-item work-item--row-link">
@@ -156,7 +159,7 @@
           </li>
         </ul>
       </section>
-      <section class="work" aria-label="Weather and time in Porto">
+      <section class="work" aria-label="Weather and time in Porto" data-home-enter>
         <button
           type="button"
           class="porto-live-trigger"
@@ -169,6 +172,7 @@
     </main>
     <script src="theme.js" defer></script>
     <script src="interaction.js" defer></script>
+    <script src="home-enter.js" defer></script>
     <script src="weather.js" defer></script>
   </body>
 </html>
